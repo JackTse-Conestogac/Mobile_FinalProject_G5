@@ -1,4 +1,4 @@
-import 'User.dart';
+import '../entities/User.dart';
 
 class UserManager{
   List<User> users;

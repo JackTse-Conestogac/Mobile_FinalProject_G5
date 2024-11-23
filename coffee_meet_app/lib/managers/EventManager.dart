@@ -1,4 +1,4 @@
-import 'Event.dart';
+import '../entities/Event.dart';
 
 class EventManager {
   List<Event> events;
