@@ -1,3 +1,4 @@
+import 'package:coffee_meet_app/entities/temporaryTestingEntities.dart';
 import 'package:flutter/material.dart';
 import '../listTiles/contactTile.dart';
 
@@ -10,10 +11,11 @@ class ContactListView extends StatelessWidget {
           title: Text(text),
         ),
         body: ListView.builder(
-            itemCount: 1,
-            itemBuilder: (context, index) {
-              return ContactTile();
-            }));
+          itemCount: TempEntities.users.length,
+          itemBuilder: (context, index) {
+            return ContactTile(TempEntities.users[index]);
+          },
+        ));
   }
 
   // It made sense to set the tabs stuff here

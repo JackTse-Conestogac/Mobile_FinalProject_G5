@@ -4,7 +4,7 @@ import 'Event.dart';
 class User{
   String name;
   String email;
-  Int phone;
+  int phone;
   String occupation;
   List<Event> attendEvents = [];
   List<User> contacts = [];
