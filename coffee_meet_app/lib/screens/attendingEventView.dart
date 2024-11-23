@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../entities/temporaryTestingEntities.dart';
+import '../listTiles/eventTile.dart';
+
 class AttendingEventView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -9,10 +12,11 @@ class AttendingEventView extends StatelessWidget {
           title: Text(text),
         ),
         body: ListView.builder(
-            itemCount: 1,
-            itemBuilder: (context, index) {
-              return ListTile();
-            }));
+          itemCount: TempEntities.events.length,
+          itemBuilder: (context, index) {
+            return EventTile(TempEntities.events[index]);
+          },
+        ));
   }
 
   // It made sense to set the tabs stuff here

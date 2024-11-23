@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'Event.dart';
 
 class User{
