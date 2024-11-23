@@ -12,7 +12,7 @@ class TabListScreen extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: Text("TEMPNAME"),
-            bottom: TabBar(
+            bottom: const TabBar(
               tabs: [
                 Tab(
                   icon: Icon(ContactListView.icon),
