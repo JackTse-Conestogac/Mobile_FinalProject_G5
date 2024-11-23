@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 import 'attendingEventView.dart';
 import 'contactListView.dart';
 
-class TabListScreen extends StatelessWidget {
+class TabListScreen extends StatefulWidget {
+  const TabListScreen({super.key});
+  @override
+  State<TabListScreen> createState() => _TabListScreenState();
+}
+
+class _TabListScreenState extends State<TabListScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
