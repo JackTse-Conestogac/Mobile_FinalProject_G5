@@ -1,17 +1,22 @@
 import 'package:coffee_meet_app/entities/temporaryTestingEntities.dart';
 import 'package:flutter/material.dart';
 
-class ContactListView extends StatelessWidget {
+
+class ContactListView extends StatefulWidget {
   // Properties
   static const String titleText = "Profile";
 
+  @override
+  State<ContactListView> createState() => _ContactListViewState();
+}
 
+class _ContactListViewState extends State<ContactListView> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          title: Text(titleText),
+          title: Text(ContactListView.titleText),
         ),
         body:
         Column(
@@ -46,6 +51,4 @@ class ContactListView extends StatelessWidget {
           ],
         ));
   }
-
-
 }
