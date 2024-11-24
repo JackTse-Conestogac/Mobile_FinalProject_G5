@@ -2,14 +2,13 @@ import 'package:coffee_meet_app/screens/createEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee_meet_app/screens/eventDetails.dart';
 import '../entities/Event.dart';
-import '../screens/eventDetails.dart';
 
 class EventTile extends StatelessWidget {
   //EventTile(this.event);
 
   final Event event;
 
- const EventTile(this.event,{Key?key}):super(key: key);
+ const EventTile(this.event,{super.key});
 
   @override
   Widget build(BuildContext context) {
