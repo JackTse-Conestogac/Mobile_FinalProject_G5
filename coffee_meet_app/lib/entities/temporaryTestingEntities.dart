@@ -9,7 +9,7 @@ class TempEntities {
   ];
 
   static List<Event> events = [
-    Event(eventId: 0, eventName: "test1", startDate: DateTime(2021, 10, 1)),
-    Event(eventId:1, eventName: "test2", startDate: DateTime(2022, 2, 2)),
+    Event(eventId: 0, eventName: "test1", startDate: DateTime(2021, 10, 1),description: "test1"),
+    Event(eventId:1, eventName: "test2", startDate: DateTime(2022, 2, 2),description: "test2"),
   ];
 }

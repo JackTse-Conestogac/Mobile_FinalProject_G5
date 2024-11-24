@@ -1,11 +1,15 @@
+import 'package:coffee_meet_app/screens/createEvent.dart';
 import 'package:flutter/material.dart';
-
+import 'package:coffee_meet_app/screens/eventDetails.dart';
 import '../entities/Event.dart';
+import '../screens/eventDetails.dart';
 
 class EventTile extends StatelessWidget {
-  EventTile(this.event);
+  //EventTile(this.event);
 
-  Event event;
+  final Event event;
+
+ const EventTile(this.event,{Key?key}):super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +24,24 @@ class EventTile extends StatelessWidget {
           children: [
             FilledButton(
               onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>  EventDetailScreen(event: event),
+                    ),
+                );
                 debugPrint("Details ${event.eventName}");
               },
               child: Text("Details"),
             ),
             FilledButton(
               onPressed: () {
-                debugPrint("Add ${event.eventName}");
+                  Navigator.push(
+                      context,
+                       MaterialPageRoute(
+                          builder: (context) =>  CreateEventScreen(),
+                       ),
+                  );
+                       debugPrint("Add ${event.eventName}");
               },
               child: Text("Add"),
             ),
