@@ -19,14 +19,13 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   final EventManager _eventManager = EventManager();
 
 
-  bool _isSaved = false;
   bool _isOutdoors = false;
   bool _isIndoors = false;
   bool _isOther = false;
 
   void _saveEvent() {
     if (_formKey.currentState!.validate()) {
-      // 表单通过验证
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Event saved successfully!')),
       );
@@ -103,8 +102,9 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                 },
               validator: (value){
                 if(value == null || value.isEmpty){
-                  return 'Date and time are requred';
+                  return 'Date and time are required';
                 }
+                return null;
               },
             ),
             const SizedBox(height: 8,),
