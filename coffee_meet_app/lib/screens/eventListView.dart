@@ -5,6 +5,8 @@ import '../entities/Event.dart';
 import '../listTiles/eventTile.dart';
 
 class EventListView extends StatelessWidget {
+  EventListView( this._tabController, {super.key});
+  TabController _tabController;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -16,7 +18,7 @@ class EventListView extends StatelessWidget {
         body: ListView.builder(
           itemCount: events.length,
           itemBuilder: (context, index) {
-            return EventTile(events[index]);
+            return EventTile(events[index],_tabController);
           },
         ));
   }

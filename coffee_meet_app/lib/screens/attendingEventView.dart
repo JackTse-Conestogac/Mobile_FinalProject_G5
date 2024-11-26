@@ -1,3 +1,4 @@
+import 'package:coffee_meet_app/listTiles/attendingTile.dart';
 import 'package:flutter/material.dart';
 
 import '../entities/temporaryTestingEntities.dart';
@@ -14,7 +15,7 @@ class AttendingEventView extends StatelessWidget {
         body: ListView.builder(
           itemCount: TempEntities.currentUser.attendEvents.length,
           itemBuilder: (context, index) {
-            return EventTile(TempEntities.currentUser.attendEvents[index]);
+            return AttendingTile(TempEntities.currentUser.attendEvents[index]);
           },
         ));
   }

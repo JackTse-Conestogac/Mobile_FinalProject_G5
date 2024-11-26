@@ -1,15 +1,14 @@
-import 'package:coffee_meet_app/entities/temporaryTestingEntities.dart';
 import 'package:coffee_meet_app/screens/createEvent.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee_meet_app/screens/eventDetails.dart';
 import '../entities/Event.dart';
 
-class EventTile extends StatelessWidget {
+class AttendingTile extends StatelessWidget {
   //EventTile(this.event);
 
   final Event event;
-  EventTile(this.event,this._tabController,{super.key});
-  TabController? _tabController;
+
+  const AttendingTile(this.event,{super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +24,9 @@ class EventTile extends StatelessWidget {
             FilledButton(
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) =>  EventDetailScreen(event: event),
-                    ),
+                  context,
+                  MaterialPageRoute(builder: (context) =>  EventDetailScreen(event: event),
+                  ),
                 );
                 debugPrint("Details ${event.eventName}");
               },
@@ -35,11 +34,15 @@ class EventTile extends StatelessWidget {
             ),
             FilledButton(
               onPressed: () {
-                  TempEntities.currentUser.attendEvents.add(event);
-                  debugPrint("Attend ${event.eventName}");
-                  _tabController?.index=1;
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>  CreateEventScreen(),
+                  ),
+                );
+                debugPrint("Add ${event.eventName}");
               },
-              child: Text("Attend"),
+              child: Text("Add"),
             ),
             IconButton(
               onPressed: () {
