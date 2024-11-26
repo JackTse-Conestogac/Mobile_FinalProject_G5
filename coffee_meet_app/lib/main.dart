@@ -1,3 +1,4 @@
+import 'package:coffee_meet_app/entities/temporaryTestingEntities.dart';
 import 'package:coffee_meet_app/screens/TabListScreens.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TempEntities.Init();
     return const MaterialApp(
       home: TabListScreen(),
     );

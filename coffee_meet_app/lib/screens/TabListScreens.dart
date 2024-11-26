@@ -1,3 +1,4 @@
+import 'package:coffee_meet_app/entities/temporaryTestingEntities.dart';
 import 'package:coffee_meet_app/screens/createProfile.dart';
 import 'package:coffee_meet_app/screens/eventListView.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class _TabListScreenState extends State<TabListScreen> {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            title: Text("TEMPNAME"),
+            title: Text(TempEntities.currentUser.name),
             bottom: const TabBar(
               tabs: [
                 Tab(

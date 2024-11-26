@@ -1,20 +1,22 @@
 import 'package:coffee_meet_app/entities/temporaryTestingEntities.dart';
 import 'package:flutter/material.dart';
 
+import '../entities/Event.dart';
 import '../listTiles/eventTile.dart';
 
 class EventListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    List<Event> events=TempEntities.events.where((e)=>!TempEntities.currentUser.attendEvents.contains(e)).toList();
     return Scaffold(
         appBar: AppBar(
           title: Text(text),
         ),
         body: ListView.builder(
-          itemCount: TempEntities.events.length,
+          itemCount: events.length,
           itemBuilder: (context, index) {
-            return EventTile(TempEntities.events[index]);
+            return EventTile(events[index]);
           },
         ));
   }

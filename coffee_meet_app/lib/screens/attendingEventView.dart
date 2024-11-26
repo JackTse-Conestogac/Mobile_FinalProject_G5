@@ -12,9 +12,9 @@ class AttendingEventView extends StatelessWidget {
           title: Text(text),
         ),
         body: ListView.builder(
-          itemCount: TempEntities.events.length,
+          itemCount: TempEntities.currentUser.attendEvents.length,
           itemBuilder: (context, index) {
-            return EventTile(TempEntities.events[index]);
+            return EventTile(TempEntities.currentUser.attendEvents[index]);
           },
         ));
   }
