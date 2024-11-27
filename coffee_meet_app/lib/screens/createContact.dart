@@ -1,19 +1,25 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-class CreateProfileScreen extends StatefulWidget{
-  const CreateProfileScreen({super.key});
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../entities/User.dart';
+import '../managers/user_local_storage_manager.dart';
+
+class CreateContactScreen extends StatefulWidget{
+  const CreateContactScreen({super.key});
 
   @override
-  State<CreateProfileScreen> createState() => _CreateProfileScreenState();
+  State<CreateContactScreen> createState() => _CreateContactScreenState();
 }
 
-class _CreateProfileScreenState extends State<CreateProfileScreen> {
+class _CreateContactScreenState extends State<CreateContactScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _occupationController = TextEditingController();
   final TextEditingController _linkdeinController = TextEditingController();
+
 
   bool _isSaved = false;
   bool _showSocialMediaIcon = false;
@@ -30,10 +36,20 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     return null;
   }
 
-  void _saveProfile() {
+  void _saveProfile() async {
     if (_formKey.currentState!.validate()) {
+      final int _id = await UserLocalStorageManager.generateId();
+
       setState(() {
+        User _user = User(
+          id: _id,
+          name: _nameController.text,
+          email: _emailController.text,
+          phone: int.parse(_phoneController.text),
+          occupation: _occupationController.text,
+        );
         _isSaved = true;
+        UserLocalStorageManager.setUser(_user);
       });
 
     }

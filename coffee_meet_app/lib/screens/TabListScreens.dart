@@ -1,4 +1,4 @@
-import 'package:coffee_meet_app/screens/createProfile.dart';
+import 'package:coffee_meet_app/screens/createContact.dart';
 import 'package:coffee_meet_app/screens/eventListView.dart';
 import 'package:flutter/material.dart';
 
@@ -46,7 +46,7 @@ class _TabListScreenState extends State<TabListScreen> {
               onPressed: (){
                 Navigator.push(
                     context, 
-                    MaterialPageRoute(builder: (context) => const CreateProfileScreen(),
+                    MaterialPageRoute(builder: (context) => const CreateContactScreen(),
                     ),
                 );
           },

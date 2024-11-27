@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../entities/User.dart';
+import '../screens/contactProfileView.dart';
 
 //When the entities are ready I will modify this to take an entity as a constructor parameter
 class ContactTile extends StatelessWidget {
@@ -32,10 +33,16 @@ class ContactTile extends StatelessWidget {
         ],
       ),
       trailing: FilledButton(
-        onPressed: () {
-          debugPrint("Email ${user.email}");
+        onPressed: (){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ContactProfileView(user: user),
+            ),
+
+          );
         },
-        child: Text("Email"),
+        child: Text("View"),
       ),
     );
   }
