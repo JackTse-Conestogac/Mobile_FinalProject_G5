@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../entities/User.dart';
 import '../managers/user_local_storage_manager.dart';
+import "LogInScreen.dart";
 
 class CreateUserScreen extends StatefulWidget{
   const CreateUserScreen({super.key});
@@ -20,6 +21,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _occupationController = TextEditingController();
+  final TextEditingController _facebookController = TextEditingController();
   final TextEditingController _linkdeinController = TextEditingController();
 
 
@@ -57,12 +59,15 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
       });
     }
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => TabListScreen(),
-      ),
-    );
+    if(_isSaved == true){
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LogInScreen(),
+        ),
+      );
+    }
+
   }
 
 
@@ -75,131 +80,146 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
       ),
       body: Form(
         key: _formKey,
-      child:ListView(
-        padding: EdgeInsets.all(16),
-        children: [
-          const Text(
-            'Name:',
-            style: TextStyle(fontSize: 30),
-          ),
-          const SizedBox(height: 8,),
-          TextFormField(
-            controller: _nameController,
-            decoration: const InputDecoration(
-              hintText: 'Required',
-              border: OutlineInputBorder(),
+        child:ListView(
+          padding: EdgeInsets.all(10),
+          children: [
+            const Text(
+              'Name:',
+              style: TextStyle(fontSize: 20),
             ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Name is required';
-              }
-              return null;
-            },
-          ),
-          const Text(
-            'Phone:',
-            style: TextStyle(fontSize: 30),
-          ),
-          const SizedBox(height: 8,
-          ),
-          TextFormField(
-            controller: _phoneController,
-            decoration: const InputDecoration(
-              hintText: 'Optional',
-              border: OutlineInputBorder(),
-            ),
-            keyboardType: TextInputType.phone,
-          ),
-          const Text(
-            'Email:',
-            style: TextStyle(fontSize: 30),
-          ),
-          const SizedBox(height: 8,
-          ),
-          TextFormField(
-            controller: _emailController,
-            decoration: const InputDecoration(
-              hintText: 'Required',
-              border: OutlineInputBorder(),
-            ),
-            validator: _isValidEmail,
-          ),
-          const Text(
-            'Occupation:',
-            style: TextStyle(fontSize: 30),
-          ),
-          const SizedBox(height: 8,
-          ),
-          TextFormField(
-            controller: _occupationController,
-            decoration: const InputDecoration(
-              hintText: 'Required',
-              border: OutlineInputBorder(),
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Occupation is required';
-              }
-              return null;
-            },
-          ),
-          const Text(
-            'LinkdeIn:',
-            style: TextStyle(fontSize: 30),
-          ),
-          const SizedBox(height: 8,
-          ),
-          TextFormField(
-            controller: _linkdeinController,
-            decoration: const InputDecoration(
-              hintText: 'Optional',
-              border: OutlineInputBorder(),
-            ),
-            keyboardType: TextInputType.url,
-          ),
-          const SizedBox(height: 8,),
-          CheckboxListTile(
-              title: const Text(
-                'Show Social Media Icon', style: TextStyle(fontSize: 25),),
-              value: _showSocialMediaIcon,
-              onChanged: (value) {
-                setState(() {
-                  _showSocialMediaIcon = value ?? false;
-                });
-              }
-          ),
-          CheckboxListTile(
-              title: const Text('Available?', style: TextStyle(fontSize: 25),),
-              value: _isAvailable,
-              onChanged: (value) {
-                setState(() {
-                  _isAvailable = value ?? false;
-                });
-              }
-          ),
-          const SizedBox(height: 16,),
-          Center(
-            child: ElevatedButton(
-              onPressed: _saveProfile,
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
-                  foregroundColor: Colors.white,
-                  textStyle: TextStyle(fontSize: 30)
+            const SizedBox(height: 5,),
+            TextFormField(
+              controller: _nameController,
+              decoration: const InputDecoration(
+                hintText: 'Required',
+                border: OutlineInputBorder(),
               ),
-              child: const Text('Save'),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Name is required';
+                }
+                return null;
+              },
             ),
-          ),
-          if(_isSaved)
-            const Padding(
-              padding: EdgeInsets.only(top: 16.0),
-              child: Center(
-                child: Text('Profile has been saved successfully!',
-                  style: TextStyle(color: Colors.green),
+            const Text(
+              'Phone:',
+              style: TextStyle(fontSize: 20),
+            ),
+            const SizedBox(height: 5,
+            ),
+            TextFormField(
+              controller: _phoneController,
+              decoration: const InputDecoration(
+                hintText: 'Optional',
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: TextInputType.phone,
+            ),
+            const Text(
+              'Email:',
+              style: TextStyle(fontSize: 20),
+            ),
+            const SizedBox(height: 5,
+            ),
+            TextFormField(
+              controller: _emailController,
+              decoration: const InputDecoration(
+                hintText: 'Required',
+                border: OutlineInputBorder(),
+              ),
+              validator: _isValidEmail,
+            ),
+            const Text(
+              'Occupation:',
+              style: TextStyle(fontSize: 20),
+            ),
+            const SizedBox(height: 5,
+            ),
+            TextFormField(
+              controller: _occupationController,
+              decoration: const InputDecoration(
+                hintText: 'Required',
+                border: OutlineInputBorder(),
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Occupation is required';
+                }
+                return null;
+              },
+            ),
+            const Text(
+              'Facebook:',
+              style: TextStyle(fontSize: 20),
+            ),
+            const SizedBox(height: 5,
+            ),
+            TextFormField(
+              controller: _facebookController,
+              decoration: const InputDecoration(
+                hintText: 'Optional',
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: TextInputType.url,
+            ),
+            const SizedBox(height: 5,),
+            const Text(
+              'LinkdeIn:',
+              style: TextStyle(fontSize: 20),
+            ),
+            const SizedBox(height: 5,
+            ),
+            TextFormField(
+              controller: _linkdeinController,
+              decoration: const InputDecoration(
+                hintText: 'Optional',
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: TextInputType.url,
+            ),
+            const SizedBox(height: 5,),
+            CheckboxListTile(
+                title: const Text(
+                  'Show Social Media Icon', style: TextStyle(fontSize: 20),),
+                value: _showSocialMediaIcon,
+                onChanged: (value) {
+                  setState(() {
+                    _showSocialMediaIcon = value ?? false;
+                  });
+                }
+            ),
+            CheckboxListTile(
+                title: const Text('Available?', style: TextStyle(fontSize: 20),),
+                value: _isAvailable,
+                onChanged: (value) {
+                  setState(() {
+                    _isAvailable = value ?? false;
+                  });
+                }
+            ),
+            const SizedBox(height: 5,),
+            Center(
+              child: ElevatedButton(
+                onPressed: _saveProfile,
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple,
+                    foregroundColor: Colors.white,
+                    textStyle: TextStyle(fontSize: 30)
+                ),
+                child: const Text('Save'),
+              ),
+            ),
+            if(_isSaved)
+              const Padding(
+                padding: EdgeInsets.only(top: 16.0),
+                child: Center(
+                  child: Text('Profile has been saved successfully!',
+                    style: TextStyle(color: Colors.green),
+                  ),
                 ),
               ),
-            ),
-        ],
-      ),
+          ],
+        ),
       ),
     );
   }

@@ -7,6 +7,8 @@ class User{
   String email;
   int phone;
   String occupation;
+  String? facebookUrl;
+  String? linkedInUrl;
   bool showSocialMedia;
   bool isAvailable;
   List<Event> attendEvents = [];
@@ -19,6 +21,8 @@ class User{
     required this.email,
     required this.phone,
     required this.occupation,
+    this.facebookUrl,
+    this.linkedInUrl,
     this.showSocialMedia = true,
     this.isAvailable = false,
     this.attendEvents = const [],
@@ -33,6 +37,8 @@ class User{
       "email":this.email,
       "phone":this.phone,
       "occupation":this.occupation,
+      "facebookUrl":this.facebookUrl,
+      "linkedInUrl":this.linkedInUrl,
       "addendEvents":this.attendEvents,
       "contacts": this.contacts,
     };
@@ -45,6 +51,8 @@ class User{
         email = json["email"],
         phone = json["phone"],
         occupation = json["occupation"],
+        facebookUrl = json["facebookUrl"],
+        linkedInUrl = json["linkedInUrl"],
         showSocialMedia = json["showSocialMedia"],
         isAvailable = json ["isAvailable"],
         attendEvents = (json["attendEvents"] as List<dynamic>)
