@@ -1,4 +1,5 @@
 import 'package:coffee_meet_app/screens/TabListScreens.dart';
+import 'package:coffee_meet_app/screens/LogInScreen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: TabListScreen(),
+      home: LogInScreen(),
     );
   }
 }

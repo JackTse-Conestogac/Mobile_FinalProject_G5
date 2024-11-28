@@ -8,18 +8,19 @@ class UserLocalStorageManager{
     static const String _key = "USER";
     static const String _userListKey = "USER_LIST";
 
+
     // To create / update  a user
   static Future<void> setUser(User user) async {
     // 1. convert User into json
-    Map<String,dynamic> json = user.toJSON();
+    //Map<String,dynamic> json = user.toJSON();
 
 
     // 2. stringify this json
-    String encodedJson = jsonEncode(json);
+    //String encodedJson = jsonEncode(json);
 
     // 3. store a key in local storage for that product with stringified JSON
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    localStorage.setString(UserLocalStorageManager._key, encodedJson);
+    //localStorage.setString(UserLocalStorageManager._key, encodedJson);
 
     // add/update the user in the user list
     List<Map<String, dynamic>> userList = await _getUserList();
@@ -65,6 +66,7 @@ class UserLocalStorageManager{
       return maxId + 1;
     }
 
+
     // Private method to get the user list from local storage
     static Future<List<Map<String, dynamic>>> _getUserList() async {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
@@ -76,5 +78,10 @@ class UserLocalStorageManager{
 
       List<dynamic> decodedJson = jsonDecode(encodedJson);
       return List<Map<String, dynamic>>.from(decodedJson);
+    }
+
+    static Future<List<Map<String, dynamic>>> getUserList() async {
+
+      return _getUserList();
     }
 }

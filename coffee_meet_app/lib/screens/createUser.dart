@@ -1,20 +1,22 @@
 import 'dart:convert';
 
+import 'package:coffee_meet_app/screens/TabListScreens.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../entities/User.dart';
 import '../managers/user_local_storage_manager.dart';
 
-class CreateContactScreen extends StatefulWidget{
-  const CreateContactScreen({super.key});
+class CreateUserScreen extends StatefulWidget{
+  const CreateUserScreen({super.key});
 
   @override
-  State<CreateContactScreen> createState() => _CreateContactScreenState();
+  State<CreateUserScreen> createState() => _CreateUserScreenState();
 }
 
-class _CreateContactScreenState extends State<CreateContactScreen> {
+class _CreateUserScreenState extends State<CreateUserScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _occupationController = TextEditingController();
@@ -44,16 +46,25 @@ class _CreateContactScreenState extends State<CreateContactScreen> {
         User _user = User(
           id: _id,
           name: _nameController.text,
+          password: _passwordController.text,
           email: _emailController.text,
           phone: int.parse(_phoneController.text),
           occupation: _occupationController.text,
         );
         _isSaved = true;
         UserLocalStorageManager.setUser(_user);
+        print("User Saved: ${_user.toJSON()}"); // Debugging
       });
-
     }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TabListScreen(),
+      ),
+    );
   }
+
 
 
   @override

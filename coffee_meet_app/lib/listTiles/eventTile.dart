@@ -32,18 +32,18 @@ class EventTile extends StatelessWidget {
               },
               child: Text("Details"),
             ),
-            FilledButton(
-              onPressed: () {
-                  Navigator.push(
-                      context,
-                       MaterialPageRoute(
-                          builder: (context) =>  CreateEventScreen(),
-                       ),
-                  );
-                       debugPrint("Add ${event.eventName}");
-              },
-              child: Text("Add"),
-            ),
+            // FilledButton(
+            //   onPressed: () {
+            //       Navigator.push(
+            //           context,
+            //            MaterialPageRoute(
+            //               builder: (context) =>  CreateEventScreen(),
+            //            ),
+            //       );
+            //            debugPrint("Add ${event.eventName}");
+            //   },
+            //   child: Text("Add"),
+            // ),
             IconButton(
               onPressed: () {
                 debugPrint("Delete ${event.eventName}");

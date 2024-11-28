@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:coffee_meet_app/listTiles/eventTile.dart';
 import 'package:flutter/material.dart';
-import 'package:coffee_meet_app/managers/EventManager.dart';
+import 'package:coffee_meet_app/managers/event_manager.dart';
 
 class CreateEventScreen extends StatefulWidget {
   const CreateEventScreen({super.key});

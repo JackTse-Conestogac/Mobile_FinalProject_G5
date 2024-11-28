@@ -1,24 +1,55 @@
 import 'package:coffee_meet_app/entities/temporaryTestingEntities.dart';
+import 'package:coffee_meet_app/managers/user_manager.dart';
 import 'package:flutter/material.dart';
 import '../listTiles/contactTile.dart';
+import '../entities/User.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ContactListView extends StatelessWidget {
+class ContactListView extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(text),
-        ),
-        body: ListView.builder(
-          itemCount: TempEntities.users.length,
-          itemBuilder: (context, index) {
-            return ContactTile(TempEntities.users[index]);
-          },
-        ));
-  }
+  State<ContactListView> createState() => _ContactListViewState();
 
-  // It made sense to set the tabs stuff here
   static const icon = Icons.contacts;
   static const text = "Contacts";
+}
+
+class _ContactListViewState extends State<ContactListView> {
+  late Future<List<User>> _users; // Define Future<List<User>> to fetch data
+
+  @override
+  void initState() {
+    super.initState();
+    _users = UserManager.viewAllUsers(); // Initialize the Future
+
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(ContactListView.text),
+      ),
+      body: FutureBuilder<List<User>>(
+        future: _users, // Use the Future here
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator()); // Show loading indicator
+          } else if (snapshot.hasError) {
+            return Center(child: Text("Error: ${snapshot.error}")); // Show error message
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text("No contacts available.")); // Handle empty state
+          } else {
+            List<User> users = snapshot.data!; // Extract the user list
+            return ListView.builder(
+              itemCount: users.length,
+              itemBuilder: (context, index) {
+                return ContactTile(users[index]);
+              },
+            );
+          }
+        },
+      ),
+    );
+  }
 }
