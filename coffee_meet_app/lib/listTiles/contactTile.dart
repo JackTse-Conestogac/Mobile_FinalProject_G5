@@ -2,47 +2,88 @@ import 'package:flutter/material.dart';
 import '../entities/User.dart';
 import '../screens/contactProfileView.dart';
 
-//When the entities are ready I will modify this to take an entity as a constructor parameter
-class ContactTile extends StatelessWidget {
+class ContactTile extends StatefulWidget {
   ContactTile(this.user);
 
   User user;
 
   @override
+  _ContactTileState createState() => _ContactTileState();
+}
+
+class _ContactTileState extends State<ContactTile> {
+  bool isAdded = false;
+
+  void _toggleAddConnectionButton() {
+    setState(() {
+      isAdded = !isAdded;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // TODO: implement ContactTile
     return ListTile(
       leading: Icon(Icons.person),
-      title: Text(user.name),
+      title: Text(widget.user.name),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(user.occupation),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("TEMP"),
-              IconButton(
-                icon: Icon(Icons.delete),
-                onPressed: (){
-                  debugPrint("Delete ${user.name}");
-                },
-              )
+              Text(widget.user.occupation),
+              Text("Contact"),
+              // IconButton(
+              //   icon: Icon(Icons.delete),
+              //   onPressed: () {
+              //     debugPrint("Delete ${widget.user.name}");
+              //   },
+              // ),
             ],
-          )
+          ),
         ],
       ),
-      trailing: FilledButton(
-        onPressed: (){
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ContactProfileView(user: user),
+      trailing: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(3.0),
+            child: SizedBox(
+              width: 100,
+              height: 20,
+              child: FilledButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ContactProfileView(user: widget.user),
+                    ),
+                  );
+                },
+                child: Text("View"),
+              ),
             ),
-
-          );
-        },
-        child: Text("View"),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(3.0),
+            child: SizedBox(
+              width: 100,
+              height: 20,
+              child: FilledButton(
+                onPressed: _toggleAddConnectionButton,
+                style: FilledButton.styleFrom(
+                  backgroundColor: isAdded
+                      ? Colors.green
+                      : Theme.of(context).primaryColor, // Default color
+                ),
+                child: Text(
+                  isAdded ? "Added" : "Add",
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
