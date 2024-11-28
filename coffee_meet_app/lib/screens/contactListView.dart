@@ -3,6 +3,7 @@ import 'package:coffee_meet_app/managers/user_manager.dart';
 import 'package:flutter/material.dart';
 import '../listTiles/contactTile.dart';
 import '../entities/User.dart';
+import 'createUser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ContactListView extends StatefulWidget {
@@ -22,7 +23,22 @@ class _ContactListViewState extends State<ContactListView> {
     _users = UserManager.viewAllUsers(); // Initialize the Future
 
   }
+  void _fetchUsers() {
+    setState(() {
+      _users = UserManager.viewAllUsers(); // Re-fetch the user list
+    });
+  }
 
+  void _navigateToAddUserScreen(BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CreateUserScreen()),
+    );
+
+    if (result == true) {
+      _fetchUsers(); // Refresh the user list if a user was added
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

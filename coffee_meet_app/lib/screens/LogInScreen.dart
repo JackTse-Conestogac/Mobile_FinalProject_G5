@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:coffee_meet_app/screens/createUser.dart';
 import 'package:coffee_meet_app/screens/TabListScreens.dart';
+import 'package:coffee_meet_app/managers/user_manager.dart';
+import 'package:coffee_meet_app/managers/user_local_storage_manager.dart';
+import 'package:coffee_meet_app/entities/User.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -13,38 +16,96 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
-  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
-
-  //Temp data for checking
-  // String _name = "Jack";
-  // String _password = "123";
-
-  // bool checkUserName(String name){
-  //   return name == _name;
-  // }
-  // bool checkPassword(String password){
-  //   return password == _password;
-  // }
+  UserManager _userManager = UserManager();
+  String? _emailError;
+  String? _passwordError;
 
 
-  void UserAuthorization(String name, String password){
+  void _navigateToCreateUserScreen(BuildContext context) async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const CreateUserScreen()),
+    );
 
-    // Check user logic here:
-
-
-    //if(checkUserName(name) && checkPassword(password)){
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const TabListScreen(),
-        ),
+    if (result == true) {
+      // Display a success message (or refresh the UI if necessary)
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("User created successfully! Please log in.")),
       );
-    //}
+    }
+  }
 
 
+  Future<void> _clearAllUsers() async {
+    _emailError = null;
+    _passwordError = null;
+    await UserLocalStorageManager.clearUserList();
+    print("All users have been deleted.");
+  }
+
+  // User Authoraization
+  Future<void> _userAuthorization() async {
+    setState(() {
+      _emailError = null;
+      _passwordError = null;
+    });
+
+    if (_emailController.text.isEmpty) {
+      setState(() {
+        _emailError = 'Email is required';
+        return;
+      });
+
+    }
+
+    if (_passwordController.text.isEmpty) {
+      setState(() {
+        _passwordError = 'Password is required';
+        return;
+      });
+
+    }
+
+    bool emailExists = await _userManager.checkEmail(_emailController.text);
+    if (!emailExists) {
+      setState(() {
+        _emailError = 'No user found with this email';
+        return;
+      });
+
+    }
+
+    bool passwordValid = await _userManager.checkPassword(_passwordController.text);
+    if (!passwordValid) {
+      setState(() {
+        _passwordError = 'Invalid password';
+        return;
+      });
+
+    }
+
+    User loggedInUser = await _userManager.fetchUser(
+      _emailController.text,
+      _passwordController.text,
+    );
+
+    // if (loggedInUser == null) {
+    //   setState(() {
+    //     // _emailError = 'Invalid email or password';
+    //   });
+    //   return;
+    // }
+
+    // If both validations pass, navigate to the next screen
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TabListScreen(user: loggedInUser), // Pass the User object
+      ),
+    );
   }
 
   @override
@@ -63,25 +124,17 @@ class _LogInScreenState extends State<LogInScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Name:',
+                  'Email:',
                   style: TextStyle(fontSize: 30),
                 ),
                 const SizedBox(height: 8),
                 TextFormField(
-                  controller: _nameController,
-                  decoration: const InputDecoration(
+                  controller: _emailController,
+                  decoration: InputDecoration(
                     hintText: 'Required',
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
+                    errorText: _emailError, // Display email error message here
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Name is required';
-                    }
-                    // else if(value != _name){
-                    //   return "No user found";
-                    // }
-                    return null;
-                  },
                 ),
                 const SizedBox(height: 16),
                 const Text(
@@ -91,35 +144,20 @@ class _LogInScreenState extends State<LogInScreen> {
                 const SizedBox(height: 8),
                 TextFormField(
                   controller: _passwordController,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     hintText: 'Required',
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
+                    errorText: _passwordError, // Display password error message here
                   ),
                   keyboardType: TextInputType.text,
                   obscureText: true, // For password fields
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Password is required';
-                    }
-                    // else if(value != _password){
-                    //   return 'Invalid password';
-                    // }
-                    return null;
-                  },
                 ),
                 const SizedBox(height: 16),
                 Center(
                   child: SizedBox(
                     width: double.infinity,
                     child: FilledButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          //  login logic here
-                          UserAuthorization(_nameController.text, _passwordController.text);
-
-
-                        }
-                      },
+                      onPressed: _userAuthorization, // Use the new validation function
                       child: const Text('Log In'),
                     ),
                   ),
@@ -127,22 +165,23 @@ class _LogInScreenState extends State<LogInScreen> {
                 const SizedBox(height: 15), // Space before the link
                 Center(
                   child: GestureDetector(
-                    onTap: () {
-                      // Navigate to the Sign-Up screen
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CreateUserScreen(),
-                        ),
-                      );
-                    },
+                    onTap: () => _navigateToCreateUserScreen(context),
                     child: const Text(
                       'Don’t have an account? Sign Up',
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.blue,
-                        //decoration: TextDecoration.underline,
                       ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Center(
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: FilledButton(
+                      onPressed: _clearAllUsers,
+                      child: const Text('Clear All Users'),
                     ),
                   ),
                 ),

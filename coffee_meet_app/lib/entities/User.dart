@@ -1,18 +1,14 @@
-import 'Event.dart';
-
-class User{
-  int id;
-  String name;
-  String password;
-  String email;
-  int phone;
-  String occupation;
-  String? facebookUrl;
-  String? linkedInUrl;
-  bool showSocialMedia;
-  bool isAvailable;
-  List<Event> attendEvents = [];
-  List<User> contacts = [];
+class User {
+  final int id;
+  final String name;
+  final String password;
+  final String email;
+  final int phone;
+  final String occupation;
+  final String facebookUrl;
+  final String linkedInUrl;
+  final bool showSocialMedia;
+  final bool isAvailable;
 
   User({
     required this.id,
@@ -21,46 +17,39 @@ class User{
     required this.email,
     required this.phone,
     required this.occupation,
-    this.facebookUrl,
-    this.linkedInUrl,
-    this.showSocialMedia = true,
+    this.facebookUrl = '',
+    this.linkedInUrl = '',
+    this.showSocialMedia = false,
     this.isAvailable = false,
-    this.attendEvents = const [],
-    this.contacts = const [],
   });
 
-  // toJSON method - convert a Product object into JSON
-  Map<String,dynamic> toJSON(){
-    return {"id":this.id,
-      "name":this.name,
-      "password":this.password,
-      "email":this.email,
-      "phone":this.phone,
-      "occupation":this.occupation,
-      "facebookUrl":this.facebookUrl,
-      "linkedInUrl":this.linkedInUrl,
-      "addendEvents":this.attendEvents,
-      "contacts": this.contacts,
+  Map<String, dynamic> toJSON() {
+    return {
+      'id': id,
+      'name': name,
+      'password': password,
+      'email': email,
+      'phone': phone ?? 00000,
+      'occupation': occupation ?? 'None',
+      'facebookUrl': facebookUrl ?? '',
+      'linkedInUrl': linkedInUrl ?? '',
+      'showSocialMedia': showSocialMedia ?? true,
+      'isAvailable': isAvailable ?? false,
     };
   }
-  // fromJSON method - convert JSON into a Product object
-  User.fromJSON(Map<String, dynamic> json)
-      : id = json["id"],
-        name = json["name"],
-        password = json["password"],
-        email = json["email"],
-        phone = json["phone"],
-        occupation = json["occupation"],
-        facebookUrl = json["facebookUrl"],
-        linkedInUrl = json["linkedInUrl"],
-        showSocialMedia = json["showSocialMedia"],
-        isAvailable = json ["isAvailable"],
-        attendEvents = (json["attendEvents"] as List<dynamic>)
-            .map((e) => Event.fromJSON(e))
-            .toList(),
-        contacts = (json["contacts"] as List<dynamic>)
-            .map((c) => User.fromJSON(c))
-            .toList();
 
+  static User fromJSON(Map<String, dynamic> json) {
+    return User(
+      id: json['id'],
+      name: json['name'],
+      password: json['password'],
+      email: json['email'],
+      phone: json['phone'],
+      occupation: json['occupation'],
+      facebookUrl: json['facebookUrl'] ?? '',
+      linkedInUrl: json['linkedInUrl'] ?? '',
+      showSocialMedia: json['showSocialMedia'] ?? true,
+      isAvailable: json['isAvailable'] ?? false,
+    );
+  }
 }
-

@@ -40,35 +40,59 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
     return null;
   }
 
+  // void _saveProfile() async {
+  //   if (_formKey.currentState!.validate()) {
+  //     final int _id = await UserLocalStorageManager.generateId();
+  //
+  //     setState(() {
+  //       User _user = User(
+  //         id: _id,
+  //         name: _nameController.text,
+  //         password: _passwordController.text,
+  //         email: _emailController.text,
+  //         phone: int.parse(_phoneController.text),
+  //         occupation: _occupationController.text,
+  //       );
+  //       _isSaved = true;
+  //       UserLocalStorageManager.setUser(_user);
+  //       print("User Saved: ${_user.toJSON()}"); // Debugging
+  //     });
+  //   }
+  //
+  //   if(_isSaved == true){
+  //     Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (context) => LogInScreen(),
+  //       ),
+  //     );
+  //   }
+  // }
+
   void _saveProfile() async {
     if (_formKey.currentState!.validate()) {
       final int _id = await UserLocalStorageManager.generateId();
 
-      setState(() {
-        User _user = User(
-          id: _id,
-          name: _nameController.text,
-          password: _passwordController.text,
-          email: _emailController.text,
-          phone: int.parse(_phoneController.text),
-          occupation: _occupationController.text,
-        );
-        _isSaved = true;
-        UserLocalStorageManager.setUser(_user);
-        print("User Saved: ${_user.toJSON()}"); // Debugging
-      });
-    }
-
-    if(_isSaved == true){
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => LogInScreen(),
-        ),
+      User _user = User(
+        id: _id,
+        name: _nameController.text,
+        password: _passwordController.text,
+        email: _emailController.text,
+        phone: int.tryParse(_phoneController.text) ?? 0,
+        occupation: _occupationController.text,
+        facebookUrl: _facebookController.text,
+        linkedInUrl: _linkdeinController.text,
+        showSocialMedia: _showSocialMediaIcon,
+        isAvailable: _isAvailable,
       );
-    }
 
+      await UserLocalStorageManager.setUser(_user);
+
+      // Navigate back with success result
+      Navigator.pop(context, true);
+    }
   }
+
 
 
 
@@ -85,7 +109,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
           children: [
             const Text(
               'Name:',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 15),
             ),
             const SizedBox(height: 5,),
             TextFormField(
@@ -102,8 +126,22 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
               },
             ),
             const Text(
+              'Password:',
+              style: TextStyle(fontSize: 15),
+            ),
+            const SizedBox(height: 5,
+            ),
+            TextFormField(
+              controller: _passwordController,
+              decoration: const InputDecoration(
+                hintText: 'Required',
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: TextInputType.phone,
+            ),
+            const Text(
               'Phone:',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 15),
             ),
             const SizedBox(height: 5,
             ),
@@ -117,7 +155,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
             ),
             const Text(
               'Email:',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 15),
             ),
             const SizedBox(height: 5,
             ),
@@ -131,7 +169,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
             ),
             const Text(
               'Occupation:',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 15),
             ),
             const SizedBox(height: 5,
             ),
@@ -150,7 +188,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
             ),
             const Text(
               'Facebook:',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 15),
             ),
             const SizedBox(height: 5,
             ),
@@ -165,7 +203,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
             const SizedBox(height: 5,),
             const Text(
               'LinkdeIn:',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 15),
             ),
             const SizedBox(height: 5,
             ),

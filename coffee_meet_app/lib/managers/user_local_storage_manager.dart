@@ -10,51 +10,48 @@ class UserLocalStorageManager{
 
 
     // To create / update  a user
-  static Future<void> setUser(User user) async {
-    // 1. convert User into json
-    //Map<String,dynamic> json = user.toJSON();
+    static Future<void> setUser(User user) async {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
 
+      List<Map<String, dynamic>> userList = await _getUserList();
+      userList.removeWhere((u) => u['id'] == user.id); // Remove any existing user with the same ID
+      userList.add(user.toJSON());
 
-    // 2. stringify this json
-    //String encodedJson = jsonEncode(json);
+      await localStorage.setString(_userListKey, jsonEncode(userList));
 
-    // 3. store a key in local storage for that product with stringified JSON
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    //localStorage.setString(UserLocalStorageManager._key, encodedJson);
-
-    // add/update the user in the user list
-    List<Map<String, dynamic>> userList = await _getUserList();
-    userList.removeWhere((u) => u['id'] == user.id); // Remove any existing user with the same ID
-    userList.add(user.toJSON());
-    localStorage.setString(_userListKey, jsonEncode(userList));
-  }
-
-
-  // To read a user
-  static Future<User?> getUser()async{
-    SharedPreferences localStorge= await SharedPreferences.getInstance();
-    String? encodedJson = localStorge.getString(UserLocalStorageManager._key);
-
-    if (encodedJson == null) {
-      return null;
+      // Debugging: Print the user list to verify
+      print("User list after saving: ${jsonEncode(userList)}");
     }
 
-    //convert that JSON into a real object
-    Map<String, dynamic> decodeJson = jsonDecode(encodedJson);
-
-    return User.fromJSON(decodeJson);
-  }
 
 
-  // To delete a user
-  static Future<User?> deleteUser() async{
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    localStorage.remove(UserLocalStorageManager._key);
-  }
+    // To read all users
+    static Future<List<User>> getUserList() async {
+      List<Map<String, dynamic>> userList = await _getUserList();
+
+      // Debugging: Print the retrieved user list
+      print("Retrieved user list: ${jsonEncode(userList)}");
+
+      return userList.map((userJson) => User.fromJSON(userJson)).toList();
+    }
 
 
-  // Generate New ID
-  static Future<int> generateId() async {
+
+    // To delete a user by ID
+    static Future<void> deleteUser(int userId) async {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      List<Map<String, dynamic>> userList = await _getUserList();
+
+      // Remove user with the given ID
+      userList.removeWhere((u) => u['id'] == userId);
+
+      // Update the local storage
+      localStorage.setString(_userListKey, jsonEncode(userList));
+    }
+
+
+  // Generate a new ID
+    static Future<int> generateId() async {
       List<Map<String, dynamic>> userList = await _getUserList();
 
       if (userList.isEmpty) {
@@ -65,7 +62,6 @@ class UserLocalStorageManager{
       int maxId = userList.map((u) => u['id'] as int).reduce((a, b) => a > b ? a : b);
       return maxId + 1;
     }
-
 
     // Private method to get the user list from local storage
     static Future<List<Map<String, dynamic>>> _getUserList() async {
@@ -80,8 +76,12 @@ class UserLocalStorageManager{
       return List<Map<String, dynamic>>.from(decodedJson);
     }
 
-    static Future<List<Map<String, dynamic>>> getUserList() async {
 
-      return _getUserList();
+    // Clear All Users
+    static Future<void> clearUserList() async {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      await localStorage.remove(_userListKey);
+      print("User list cleared.");
     }
+
 }
