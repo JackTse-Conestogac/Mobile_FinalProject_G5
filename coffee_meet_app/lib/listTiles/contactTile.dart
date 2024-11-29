@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../entities/User.dart';
 import '../screens/contactProfileView.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class ContactTile extends StatefulWidget {
   ContactTile(this.user);
@@ -13,6 +15,14 @@ class ContactTile extends StatefulWidget {
 
 class _ContactTileState extends State<ContactTile> {
   bool isAdded = false;
+  late String emailUrl;
+
+
+  @override
+  void initState() {
+    super.initState();
+    emailUrl = widget.user.email;
+  }
 
   void _toggleAddConnectionButton() {
     setState(() {
@@ -28,12 +38,21 @@ class _ContactTileState extends State<ContactTile> {
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(widget.user.occupation),
-              Text("Contact"),
+              IconButton(
+                onPressed: () async {
+                  final Uri emailUri = Uri(
+                    scheme: 'mailto',
+                    path: emailUrl,
+                  );
+                    await launchUrl(emailUri);
+                },
+                icon: Icon(Icons.mail),
+              ),
+              //Text("Contact"),
               // IconButton(
               //   icon: Icon(Icons.delete),
               //   onPressed: () {
@@ -56,7 +75,8 @@ class _ContactTileState extends State<ContactTile> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ContactProfileView(user: widget.user),
+                      builder: (context) =>
+                          ContactProfileView(user: widget.user),
                     ),
                   );
                 },
