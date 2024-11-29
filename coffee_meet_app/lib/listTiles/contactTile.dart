@@ -1,13 +1,16 @@
+import 'package:coffee_meet_app/entities/Connection.dart';
 import 'package:flutter/material.dart';
 import '../entities/User.dart';
 import '../screens/contactProfileView.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../managers/connection_manager.dart';
 
 
 class ContactTile extends StatefulWidget {
   ContactTile(this.user);
 
   User user;
+
 
   @override
   _ContactTileState createState() => _ContactTileState();
@@ -16,7 +19,8 @@ class ContactTile extends StatefulWidget {
 class _ContactTileState extends State<ContactTile> {
   bool isAdded = false;
   late String emailUrl;
-
+  late UserConnection userConnection;
+  late ConnectionManager _connectionManager;
 
   @override
   void initState() {
@@ -27,6 +31,18 @@ class _ContactTileState extends State<ContactTile> {
   void _toggleAddConnectionButton() {
     setState(() {
       isAdded = !isAdded;
+
+      userConnection = new UserConnection(primaryUserId: primaryUserId, foreignUserId: widget.user.id); // Missing current account user id, needs a global state for it.
+
+      if(isAdded){
+        _connectionManager.connectUser(userConnection);
+        print("User connected");
+      }
+      else{
+        _connectionManager.disconnectUser(userConnection.connectionId);
+        print("User disconnected");
+      }
+
     });
   }
 
@@ -97,7 +113,7 @@ class _ContactTileState extends State<ContactTile> {
                       : Theme.of(context).primaryColor, // Default color
                 ),
                 child: Text(
-                  isAdded ? "Added" : "Add",
+                  isAdded ? "Connected" : "Add",
                   style: const TextStyle(color: Colors.white),
                 ),
               ),

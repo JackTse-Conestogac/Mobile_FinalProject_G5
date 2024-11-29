@@ -5,7 +5,6 @@ import '../entities/User.dart';
 
 
 class UserLocalStorageManager{
-    static const String _key = "USER";
     static const String _userListKey = "USER_LIST";
 
 
