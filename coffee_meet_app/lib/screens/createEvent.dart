@@ -19,9 +19,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   final EventManager _eventManager = EventManager();
 
 
-  bool _isOutdoors = false;
-  bool _isIndoors = false;
-  bool _isOther = false;
+  String _selectedOption ='';
 
   void _saveEvent() {
     if (_formKey.currentState!.validate()) {
@@ -122,36 +120,63 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
               keyboardType: TextInputType.multiline,
               scrollController: ScrollController(),
             ),
-            const SizedBox(height: 8,),
-            CheckboxListTile(
-                title: const Text(
-                  'Outdoors', style: TextStyle(fontSize: 25),),
-                value: _isOutdoors,
-                onChanged: (value) {
-                  setState(() {
-                    _isOutdoors = value ?? false;
-                  });
-                }
-            ),
-            CheckboxListTile(
-                title: const Text(
-                  'Indoors', style: TextStyle(fontSize: 25),),
-                value: _isIndoors,
-                onChanged: (value) {
-                  setState(() {
-                    _isIndoors = value ?? false;
-                  });
-                }
-            ),
-            CheckboxListTile(
-                title: const Text(
-                  'Others', style: TextStyle(fontSize: 25),),
-                value: _isOther,
-                onChanged: (value) {
-                  setState(() {
-                    _isOther = value ?? false;
-                  });
-                }
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Outdoors',
+                      style: TextStyle(fontSize: 25),
+                    ),
+                    Radio<String>(
+                      value: 'Outdoors',
+                      groupValue: _selectedOption,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedOption = value!;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Indoors',
+                      style: TextStyle(fontSize: 25),
+                    ),
+                    Radio<String>(
+                      value: 'Indoors',
+                      groupValue: _selectedOption,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedOption = value!;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Others',
+                      style: TextStyle(fontSize: 25),
+                    ),
+                    Radio<String>(
+                      value: 'Others',
+                      groupValue: _selectedOption,
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedOption = value!;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ],
             ),
             const SizedBox(height: 8),
           Center(
