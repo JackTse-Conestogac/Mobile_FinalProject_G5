@@ -23,12 +23,19 @@ class UserManager {
       user.email.toLowerCase() == email.toLowerCase() &&
           user.password == password,
     );
-
   }
+
 
 
   // Add a new user
   Future<void> addUser(User user) async {
+
+    // Check if email already exist
+    bool emailExists = await checkEmail(user.email);
+    if (emailExists) {
+      throw Exception("Email already in use");
+    }
+
     int newId = await UserLocalStorageManager.generateId();
     user = User(
       id: newId,
