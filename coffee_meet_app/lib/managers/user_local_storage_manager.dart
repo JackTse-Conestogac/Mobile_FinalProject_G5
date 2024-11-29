@@ -22,8 +22,6 @@ class UserLocalStorageManager{
       print("User list after saving: ${jsonEncode(userList)}");
     }
 
-
-
     // To read all users
     static Future<List<User>> getUserList() async {
       List<Map<String, dynamic>> userList = await _getUserList();

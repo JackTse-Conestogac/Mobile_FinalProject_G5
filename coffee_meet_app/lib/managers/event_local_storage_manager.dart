@@ -5,42 +5,70 @@ import 'dart:convert';
 import '../entities/User.dart';
 
 
-class EventLocalStorageManager{
-  static const String _key = "EVENT";
+class EventLocalStorageManager {
+  static const String _eventListkey = "EVENT_LIST";
 
   // To create event
   static Future<void> setEvent(Event event) async {
-    // 1. convert User into json
-    Map<String,dynamic> json = event.toJSON();
-
-    // 2. stringify this json
-    String encodedJson = jsonEncode(json);
-
-    // 3. store a key in local storage for that product with stringified JSON
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    localStorage.setString(EventLocalStorageManager._key, encodedJson);
+
+    List<Map<String, dynamic>> eventList = await _getEventList();
+    eventList.removeWhere((u) => u['id'] == event.eventId);
+    eventList.add(event.toJSON());
+
+    await localStorage.setString(_eventListkey, jsonEncode(eventList));
+
+    // Debugging: Print the user list to verify
+    print("Event list after saving: ${jsonEncode(eventList)}");
   }
 
-  // To read event
-  static Future<Event?> getEvent()async{
-    SharedPreferences localStorge= await SharedPreferences.getInstance();
-    String? encodedJson = localStorge.getString(EventLocalStorageManager._key);
+  // To read all events
+  static Future<List<Event>> getEventList() async {
+    List<Map<String, dynamic>> eventList = await _getEventList();
 
-    if (encodedJson == null) {
-      return null;
+    // Debugging: Print the retrieved user list
+    print("Retrieved event list: ${jsonEncode(eventList)}");
+
+    return eventList.map((eventJson) => Event.fromJSON(eventJson)).toList();
+  }
+
+  // To delete a event by ID
+  static Future<void> deleteEvent(int eventId) async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    List<Map<String, dynamic>> eventList = await _getEventList();
+
+    // Remove user with the given ID
+    eventList.removeWhere((u) => u['id'] == eventId);
+
+    // Update the local storage
+    localStorage.setString(_eventListkey, jsonEncode(eventList));
+  }
+
+  // Generate a new ID
+  static Future<int> generateEventId() async {
+    List<Map<String, dynamic>> eventList = await _getEventList();
+
+    if (eventList.isEmpty) {
+      return 1; // Start with ID 1 if no users exist
     }
 
-    //convert that JSON into a real object
-    Map<String, dynamic> decodeJson = jsonDecode(encodedJson);
-
-    return Event.fromJSON(decodeJson);
+    // Find the highest existing ID and add 1
+    int maxId = eventList.map((u) => u['id'] as int).reduce((a, b) => a > b ? a : b);
+    return maxId + 1;
   }
 
 
-  // To delete a event
-  static Future<User?> deleteEvent() async{
+  // Private method to get the event list from local storage
+  static Future<List<Map<String, dynamic>>> _getEventList() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    localStorage.remove(EventLocalStorageManager._key);
+    String? encodedJson = localStorage.getString(_eventListkey);
+
+    if (encodedJson == null) {
+      return [];
+    }
+
+    List<dynamic> decodedJson = jsonDecode(encodedJson);
+    return List<Map<String, dynamic>>.from(decodedJson);
   }
 
 }

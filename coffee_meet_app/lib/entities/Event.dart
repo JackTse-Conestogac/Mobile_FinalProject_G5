@@ -1,4 +1,5 @@
 import 'User.dart';
+import '../enum/event_location.dart';
 
 class Event {
   int eventId;
@@ -6,7 +7,8 @@ class Event {
   String eventName;
   DateTime startDate;
   String description;
-  List<User> attendance;
+  EventLocation eventLocationStatus = EventLocation.indoor;
+
 
   Event({
     required this.eventId,
@@ -14,7 +16,7 @@ class Event {
     required this.eventName,
     required this.startDate,
     required this.description,
-    this.attendance = const []
+    required this.eventLocationStatus,
   });
 
   // toJSON method - convert a Product object into JSON
@@ -24,7 +26,7 @@ class Event {
       "evenName":this.eventName,
       "startDate":this.startDate,
       "description": this.description,
-      "attendance":this.attendance,
+      "eventLocation": this.eventLocationStatus,
     };
   }
   // fromJSON method - convert JSON into a Product object
@@ -34,5 +36,6 @@ class Event {
         this.eventName = json["eventName"],
         this.startDate = json["startDate"],
         this.description = json["description"],
-        this.attendance = json["attendance"];
+        this.eventLocationStatus = json["eventLocationStatus"];
+
 }

@@ -32,16 +32,16 @@ class _ContactTileState extends State<ContactTile> {
     setState(() {
       isAdded = !isAdded;
 
-      userConnection = new UserConnection(primaryUserId: primaryUserId, foreignUserId: widget.user.id); // Missing current account user id, needs a global state for it.
+      //userConnection = new UserConnection(primaryUserId: primaryUserId, foreignUserId: widget.user.id); // Missing current account user id, needs a global state for it.
 
-      if(isAdded){
-        _connectionManager.connectUser(userConnection);
-        print("User connected");
-      }
-      else{
-        _connectionManager.disconnectUser(userConnection.connectionId);
-        print("User disconnected");
-      }
+      // if(isAdded){
+      //   _connectionManager.connectUser(userConnection);
+      //   print("User connected");
+      // }
+      // else{
+      //   _connectionManager.disconnectUser(userConnection.connectionId);
+      //   print("User disconnected");
+      // }
 
     });
   }

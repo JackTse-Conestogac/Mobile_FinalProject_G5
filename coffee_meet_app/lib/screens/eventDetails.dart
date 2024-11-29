@@ -50,11 +50,11 @@ class EventDetailScreen extends StatelessWidget{
               ),
             ),
             const SizedBox(height: 8,),
-            Text(
-              event.attendance.isEmpty? 'No description provided' :
-                  'This is where the detailded description of the event will populate',
-              style: TextStyle(fontSize: 20),
-            ),
+            // Text(
+            //   event.attendance.isEmpty? 'No description provided' :
+            //       'This is where the detailded description of the event will populate',
+            //   style: TextStyle(fontSize: 20),
+            // ),
             const SizedBox(height: 16,),
             Text(
               event.description,

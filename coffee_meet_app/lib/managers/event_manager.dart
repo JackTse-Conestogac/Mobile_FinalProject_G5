@@ -1,32 +1,53 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import '../managers/event_local_storage_manager.dart';
 import '../entities/Event.dart';
 
 
 class EventManager {
-  List<Event> events;
 
-  EventManager({
-    this.events = const []
+
+  static Future<List<Event>> viewAllEvents() async {
+    return await EventLocalStorageManager.getEventList();
+  }
+
+
+  Future<void> addEvent(Event event) async {
+    int newId = await EventLocalStorageManager.generateEventId();
+    event = Event(
+      eventId: newId,
+      hostId: event.hostId,
+      eventName: event.eventName,
+      startDate: event.startDate,
+      description: event.description,
+      eventLocationStatus:  event.eventLocationStatus,
+    );
+    await EventLocalStorageManager.setEvent(event);
+  }
+
+
+  Future<void> editUser(int eventId, Event updatedEvent) async {
+    // Fetch all events
+    List<Event> allEvents = await viewAllEvents();
+
+    // Find and update the specific user
+    for (int i = 0; i < allEvents.length; i++) {
+      if (allEvents[i].eventId == eventId) {
+        allEvents[i] = updatedEvent;
+        break;
+      }
     }
-  );
 
-  void ViewEventsDetail(){
-
+    // Save the updated event to local storage
+    await EventLocalStorageManager.setEvent(updatedEvent);
   }
 
-  void AddEvent(){
 
+  // Delete a user by ID
+  Future<void> deleteEvent(int eventId) async {
+    await EventLocalStorageManager.deleteEvent(eventId);
   }
 
-  void EditEvent(){
-
-  }
-
-  void DeleteEvent(){
-
-  }
 
   // manager the selected event's date
   Future<String?> selectDateTime(BuildContext context) async {
