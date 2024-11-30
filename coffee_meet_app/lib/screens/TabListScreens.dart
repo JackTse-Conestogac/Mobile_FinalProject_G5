@@ -18,16 +18,22 @@ class TabListScreen extends StatefulWidget {
   State<TabListScreen> createState() => _TabListScreenState();
 }
 
-class _TabListScreenState extends State<TabListScreen> {
+class _TabListScreenState extends State<TabListScreen> with SingleTickerProviderStateMixin{
+  //I'll be honest, I barely understand this - Christopher
+  //I'm fairly certain the with SingleTicker... lets the object
+  // provide itself to TabController.vsync for to be used for animations
+  // -- Reading further "mixin"s seem to be Interfaces with default implementation
+  // Which Java has had for ages, and didn't feel the need to give a stupid name
+  late final _tabController = TabController(length: 3, vsync: this);
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: 3,
+    return Container(
         child: Scaffold(
           appBar: AppBar(
             title: Text("${widget.user.name} UserID: ${widget.user.id}"),
-            bottom: const TabBar(
+            bottom:  TabBar(
+              controller: _tabController,
               tabs: [
                 Tab(
                   icon: Icon(ContactListView.icon),
@@ -44,7 +50,9 @@ class _TabListScreenState extends State<TabListScreen> {
               ],
             ),
           ),
-          body: TabBarView(children: [
+          body: TabBarView(
+            controller: _tabController,
+            children: [
             ContactListView(),
             AttendingEventView(),
             EventListView(),
