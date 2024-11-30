@@ -15,7 +15,7 @@ class EventLocalStorageManager {
       List<Map<String, dynamic>> eventList = await _getEventList();
 
       // Update or add the event
-      eventList.removeWhere((e) => e['id'] == event.eventId);
+      eventList.removeWhere((e) => e['eventId'] == event.eventId);
       eventList.add(event.toJSON());
 
       await localStorage.setString(_eventListkey, jsonEncode(eventList));
@@ -29,6 +29,7 @@ class EventLocalStorageManager {
 
   // To read all events
   static Future<List<Event>> getEventList() async {
+
     List<Map<String, dynamic>> eventList = await _getEventList();
 
     // Debugging: Print the retrieved user list

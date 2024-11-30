@@ -91,7 +91,7 @@ class EventManager {
       selectedTime.minute,
     );
 
-    return "${fullDateTime.toIso8601String().split('T')[0]} ${selectedTime.format(context)}";
+    return fullDateTime.toIso8601String();
   }
 
 

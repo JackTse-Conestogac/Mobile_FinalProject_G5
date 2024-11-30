@@ -5,11 +5,11 @@ import '../enum/event_location.dart';
 
 class Event {
   int eventId;
-  int hostId = GlobalState().getCurrentUser().id;
+  int hostId;
   String eventName;
-  DateTime startDate;
+  String startDate;
   String description;
-  EventLocation eventLocationStatus = EventLocation.indoor;
+  EventLocation eventLocationStatus ;
 
 
   Event({
@@ -28,7 +28,7 @@ class Event {
       "evenName":this.eventName,
       "startDate":this.startDate,
       "description": this.description,
-      "eventLocation": this.eventLocationStatus,
+      "eventLocation": this.eventLocationStatus.name,
     };
   }
 
@@ -39,6 +39,7 @@ class Event {
         this.eventName = json["eventName"],
         this.startDate = json["startDate"],
         this.description = json["description"],
-        this.eventLocationStatus = json["eventLocationStatus"];
-
+        this.eventLocationStatus = EventLocation.values.firstWhere(
+  (e) => e.name == json["eventLocation"], // Deserialize string to enum
+  orElse: () => EventLocation.indoor,);
 }

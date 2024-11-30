@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:coffee_meet_app/listTiles/eventTile.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee_meet_app/managers/event_manager.dart';
+import 'package:coffee_meet_app/managers/event_local_storage_manager.dart';
 import 'package:coffee_meet_app/entities/Event.dart';
 import 'package:coffee_meet_app/screens/TabListScreens.dart';
 
@@ -26,7 +27,8 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   String _eventError = "";
   String _selectedOption ='';
 
-EventLocation _getEventLocation(String location){
+
+  EventLocation _getEventLocation(String location){
   EventLocation eventLocation = EventLocation.indoor;
 
   switch(location){
@@ -44,25 +46,51 @@ EventLocation _getEventLocation(String location){
   return eventLocation;
 }
 
-  Future<void> _saveEvent() async {
-    if (_formKey.currentState!.validate()) {
 
+  Future<void> _saveEvent() async {
+    print("Save button pressed");
+    if (_formKey.currentState!.validate()) {
+      print("Form validated successfully");
+
+      if (_selectedOption.isEmpty) {
+        print("Event location not selected");
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Please select an event location.')),
+        );
+        return;
+      }
       try {
+        final currentUser = GlobalState().getCurrentUser();
+        if(currentUser == null){
+          setState(() {
+            _eventError = 'User not logged in.';
+          });
+          return;
+        }
+
+        print("Current user: ${currentUser.id}");
+        // fetch a unique event id
+        int newEventId = await EventLocalStorageManager.generateEventId();
+        print("Generated new event ID: $newEventId");
+
         Event _event = Event(
-          eventId: 0,
-          hostId: GlobalState().getCurrentUser().id,
+          eventId: newEventId,
+          hostId: currentUser.id,
           eventName: _titleController.text,
-          startDate: DateTime.parse(_dateController.text),
+          startDate: _dateController.text,
           description: _descriptionController.text,
           eventLocationStatus: _getEventLocation(_selectedOption),
         );
 
-
+        print("Event object created: $_event");
         // Save event
         await _eventManager.addEvent(_event);
 
         // Fetch all events for debug
         List<Event> allEvents = await EventManager.viewAllEvents();
+        print("Fetched events: ${allEvents.length}");
+
         // Show total event count
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -72,25 +100,27 @@ EventLocation _getEventLocation(String location){
           ),
         );
 
-
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) =>
-                TabListScreen(user: GlobalState().getCurrentUser()),
+                TabListScreen(user:currentUser),
           ),
         );
-
+        print("Navigated to TabListScreen");
       } catch (e) {
         setState(() {
           _eventError = e.toString();
         });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: $_eventError')),
+        );
       }
+    }else{
+      print("Form validation failed");
     }
 
-
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -158,6 +188,7 @@ EventLocation _getEventLocation(String location){
                       setState(() {
                         _dateController.text = selectedDateTime;
                       });
+                      print("Selected date and time: $selectedDateTime");
                     }
                 },
               validator: (value){
