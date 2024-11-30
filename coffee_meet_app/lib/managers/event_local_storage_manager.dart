@@ -53,7 +53,7 @@ class EventLocalStorageManager {
   // Generate a new ID
   static Future<int> generateEventId() async {
     List<Map<String, dynamic>> eventList = await _getEventList();
-
+print("print generate Id${eventList}");
     if (eventList.isEmpty) {
       return 1; // Start with ID 1 if no users exist
     }
@@ -75,6 +75,13 @@ class EventLocalStorageManager {
 
     List<dynamic> decodedJson = jsonDecode(encodedJson);
     return List<Map<String, dynamic>>.from(decodedJson);
+  }
+
+  // Clear All Events
+  static Future<void> clearEventList() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    await localStorage.remove(_eventListkey);
+    print("Event list cleared.");
   }
 
 }

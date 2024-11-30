@@ -6,6 +6,8 @@ import 'package:coffee_meet_app/managers/user_manager.dart';
 import 'package:coffee_meet_app/managers/user_local_storage_manager.dart';
 import 'package:coffee_meet_app/entities/User.dart';
 
+import '../managers/event_local_storage_manager.dart';
+
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
 
@@ -46,6 +48,13 @@ class _LogInScreenState extends State<LogInScreen> {
     _passwordError = null;
     await UserLocalStorageManager.clearUserList();
     print("All users have been deleted.");
+  }
+
+  Future<void> _clearAllEvents() async {
+    _emailError = null;
+    _passwordError = null;
+    await EventLocalStorageManager.clearEventList();
+    print("All events have been deleted.");
   }
 
   // User Authoraization
@@ -182,6 +191,16 @@ class _LogInScreenState extends State<LogInScreen> {
                     child: FilledButton(
                       onPressed: _clearAllUsers,
                       child: const Text('Clear All Users'),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Center(
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: FilledButton(
+                      onPressed: _clearAllEvents,
+                      child: const Text('Clear All Events'),
                     ),
                   ),
                 ),

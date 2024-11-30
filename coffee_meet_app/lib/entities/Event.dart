@@ -25,7 +25,7 @@ class Event {
   Map<String,dynamic> toJSON(){
     return {"eventId":this.eventId,
       "hostId": this.hostId,
-      "evenName":this.eventName,
+      "eventName":this.eventName,
       "startDate":this.startDate,
       "description": this.description,
       "eventLocation": this.eventLocationStatus.name,
