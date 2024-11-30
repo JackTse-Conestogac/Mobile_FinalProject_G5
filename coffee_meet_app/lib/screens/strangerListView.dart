@@ -1,33 +1,33 @@
+import 'package:coffee_meet_app/entities/GlobalState.dart';
 import 'package:coffee_meet_app/entities/temporaryTestingEntities.dart';
+import 'package:coffee_meet_app/managers/connection_manager.dart';
 import 'package:coffee_meet_app/managers/user_manager.dart';
 import 'package:flutter/material.dart';
-import '../entities/GlobalState.dart';
 import '../listTiles/contactTile.dart';
 import '../entities/User.dart';
-import '../managers/connection_manager.dart';
 import 'createUser.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ContactListView extends StatefulWidget {
+class StrangerListView extends StatefulWidget {
   @override
-  State<ContactListView> createState() => _ContactListViewState();
+  State<StrangerListView> createState() => _StrangerListViewState();
 
-  static const icon = Icons.contacts;
-  static const text = "Contacts";
+  static const icon = Icons.person;
+  static const text = "Other Users";
 }
 
-class _ContactListViewState extends State<ContactListView> {
+class _StrangerListViewState extends State<StrangerListView> {
   late Future<List<User>> _users; // Define Future<List<User>> to fetch data
 
   @override
   void initState() {
     super.initState();
-    _users = ConnectionManager.getContactsForUser(GlobalState().getCurrentUser()); // Initialize the Future
+    _users = ConnectionManager.getContactsForUser(GlobalState().getCurrentUser(), inverted: true); // Initialize the Future
 
   }
   void _fetchUsers() {
     setState(() {
-      _users = ConnectionManager.getContactsForUser(GlobalState().getCurrentUser()); // Re-fetch the user list
+      _users = ConnectionManager.getContactsForUser(GlobalState().getCurrentUser(), inverted: true); // Re-fetch the user list
     });
   }
 
@@ -46,7 +46,7 @@ class _ContactListViewState extends State<ContactListView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(ContactListView.text),
+        title: Text(StrangerListView.text),
       ),
       body: FutureBuilder<List<User>>(
         future: _users, // Use the Future here
