@@ -40,7 +40,7 @@ class ConnectionManager{
 
    //Put this in the ConnectionManager, but it might fit better under user or event.
    // If inverted it returns only the events WITHOUT the connection
-   Future<List<Event>> getEventsForUser(User user, {bool inverted=false}) async {
+   static Future<List<Event>> getEventsForUser(User user, {bool inverted=false}) async {
       List<EventConnection> eventConnectionList = await ConnectionLocalStorageManager.getEventConnectionList();
       List<Event> events = await EventManager.viewAllEvents();
       List<Event> userEvents = eventConnectionList.where((c1)=>c1.userId==user.id).map((c2)=>events.firstWhere((e)=>e.eventId==c2.eventId)).toList();

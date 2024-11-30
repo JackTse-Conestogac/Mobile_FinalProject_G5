@@ -54,7 +54,7 @@ class _TabListScreenState extends State<TabListScreen> with SingleTickerProvider
             controller: _tabController,
             children: [
             ContactListView(),
-            AttendingEventView(),
+            AttendingEventView(user: widget.user),
             EventListView(user:widget.user),
           ],
           ),

@@ -25,12 +25,12 @@ class _EventListViewState extends State<EventListView> {
   @override
   void initState() {
     super.initState();
-    _UserNOTevents=ConnectionManager().getEventsForUser(widget.user, inverted: true);
+    _UserNOTevents=ConnectionManager.getEventsForUser(widget.user, inverted: true);
   }
 
   void refreshEvents(){
     setState(() {
-      _UserNOTevents=ConnectionManager().getEventsForUser(widget.user, inverted: true);
+      _UserNOTevents=ConnectionManager.getEventsForUser(widget.user, inverted: true);
     });
   }
 
