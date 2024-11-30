@@ -1,8 +1,10 @@
 import 'package:coffee_meet_app/entities/temporaryTestingEntities.dart';
+import 'package:coffee_meet_app/managers/connection_manager.dart';
 import 'package:coffee_meet_app/managers/event_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../entities/Event.dart';
+import '../entities/User.dart';
 import '../listTiles/eventTile.dart';
 
 class EventListView extends StatefulWidget {
@@ -11,28 +13,35 @@ class EventListView extends StatefulWidget {
 
   static const icon = Icons.edit_calendar;
   static const text = "Events";
+  final User user;
 
-  const EventListView({super.key});
+  const EventListView({super.key, required this.user});
 }
 
 class _EventListViewState extends State<EventListView> {
-  late Future<List<Event>> _events = EventManager.viewAllEvents();
+  //not to signify that it is inverted
+  late Future<List<Event>> _UserNOTevents;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    _UserNOTevents=ConnectionManager().getEventsForUser(widget.user, inverted: true);
+  }
+
+  void refreshEvents(){
+    setState(() {
+      _UserNOTevents=ConnectionManager().getEventsForUser(widget.user, inverted: true);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: Text(EventListView.text),
       ),
       body: FutureBuilder<List<Event>>(
-        future: _events,
+        future: _UserNOTevents,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());

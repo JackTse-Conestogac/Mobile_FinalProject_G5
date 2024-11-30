@@ -55,7 +55,7 @@ class _TabListScreenState extends State<TabListScreen> with SingleTickerProvider
             children: [
             ContactListView(),
             AttendingEventView(),
-            EventListView(),
+            EventListView(user:widget.user),
           ],
           ),
           floatingActionButton: FloatingActionButton(

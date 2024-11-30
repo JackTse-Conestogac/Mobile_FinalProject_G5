@@ -122,7 +122,7 @@ class ConnectionLocalStorageManager {
       print("Event Connection list cleared.");
     }
 
-    static Future<List<EventConnection>> GetEventConnectionList() async{
+    static Future<List<EventConnection>> getEventConnectionList() async{
       List<Map<String, dynamic>> userList = await _getEventConnectionList();
       return userList.map((eventConnectionJson) => EventConnection.fromJSON(eventConnectionJson)).toList();
     }
