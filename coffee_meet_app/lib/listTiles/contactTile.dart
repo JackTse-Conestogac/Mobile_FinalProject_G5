@@ -1,4 +1,5 @@
 import 'package:coffee_meet_app/entities/Connection.dart';
+import 'package:coffee_meet_app/entities/GlobalState.dart';
 import 'package:flutter/material.dart';
 import '../entities/User.dart';
 import '../screens/contactProfileView.dart';
@@ -8,7 +9,11 @@ import '../managers/connection_manager.dart';
 
 class ContactTile extends StatefulWidget {
   ContactTile(this.user);
-
+  ContactTile.wController(this.user, this._tabController){
+    //print("TileUser = ${user.id}");
+  }
+  TabController? _tabController;
+  Function? refreshList;
   User user;
 
 
@@ -26,6 +31,14 @@ class _ContactTileState extends State<ContactTile> {
   void initState() {
     super.initState();
     emailUrl = widget.user.email;
+  }
+
+  void addUserConnection(){
+    setState(() {
+
+      ConnectionManager.connectUser(GlobalState().getCurrentUser(), widget.user);
+    });
+    widget._tabController?.index=0;
   }
 
   void _toggleAddConnectionButton() {
@@ -106,7 +119,7 @@ class _ContactTileState extends State<ContactTile> {
               width: 118,
               height: 20,
               child: FilledButton(
-                onPressed: _toggleAddConnectionButton,
+                onPressed: addUserConnection,
                 style: FilledButton.styleFrom(
                   backgroundColor: isAdded
                       ? Colors.green

@@ -7,12 +7,15 @@ import '../entities/Event.dart';
 import '../managers/connection_local_storage_manager.dart';
 
 class ConnectionManager {
-  Future<void> connectUser(UserConnection userConnect) async {
+  static Future<void> connectUser(User primary,User secondary) async {
+
     int newId = await ConnectionLocalStorageManager.generatUserConectionId();
-    userConnect = UserConnection(
+
+    var userConnect = UserConnection(
         connectionId: newId,
-        primaryUserId: userConnect.primaryUserId,
-        foreignUserId: userConnect.foreignUserId);
+        primaryUserId: primary.id,
+        foreignUserId: secondary.id
+    );
     await ConnectionLocalStorageManager.setUserConnection(userConnect);
   }
 
