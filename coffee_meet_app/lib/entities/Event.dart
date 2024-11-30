@@ -23,7 +23,7 @@ class Event {
 
   // toJSON method - convert a Product object into JSON
   Map<String,dynamic> toJSON(){
-    return {"id":this.eventId,
+    return {"eventId":this.eventId,
       "hostId": this.hostId,
       "evenName":this.eventName,
       "startDate":this.startDate,

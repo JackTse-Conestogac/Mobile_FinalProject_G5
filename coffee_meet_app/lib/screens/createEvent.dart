@@ -87,18 +87,6 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
         // Save event
         await _eventManager.addEvent(_event);
 
-        // Fetch all events for debug
-        List<Event> allEvents = await EventManager.viewAllEvents();
-        print("Fetched events: ${allEvents.length}");
-
-        // Show total event count
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              'Event saved successfully! Total events: ${allEvents.length}',
-            ),
-          ),
-        );
 
         Navigator.push(
           context,

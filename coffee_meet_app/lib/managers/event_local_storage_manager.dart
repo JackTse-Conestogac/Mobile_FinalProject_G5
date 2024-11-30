@@ -44,7 +44,7 @@ class EventLocalStorageManager {
     List<Map<String, dynamic>> eventList = await _getEventList();
 
     // Remove user with the given ID
-    eventList.removeWhere((u) => u['id'] == eventId);
+    eventList.removeWhere((u) => u['eventId'] == eventId);
 
     // Update the local storage
     localStorage.setString(_eventListkey, jsonEncode(eventList));
@@ -59,7 +59,7 @@ class EventLocalStorageManager {
     }
 
     // Find the highest existing ID and add 1
-    int maxId = eventList.map((u) => u['id'] as int).reduce((a, b) => a > b ? a : b);
+    int maxId = eventList.map((u) => u['eventId'] as int).reduce((a, b) => a > b ? a : b);
     return maxId + 1;
   }
 
