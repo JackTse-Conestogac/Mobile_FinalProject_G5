@@ -8,12 +8,13 @@ import '../managers/connection_manager.dart';
 
 
 class ContactTile extends StatefulWidget {
-  ContactTile(this.user);
-  ContactTile.wController(this.user, this._tabController){
+  ContactTile(this.user,{this.connected=false});
+  ContactTile.wController(this.user, this._tabController,{this.connected=false}){
     //print("TileUser = ${user.id}");
   }
   TabController? _tabController;
   Function? refreshList;
+  bool connected;
   User user;
 
 
@@ -22,7 +23,7 @@ class ContactTile extends StatefulWidget {
 }
 
 class _ContactTileState extends State<ContactTile> {
-  bool isAdded = false;
+  //bool isAdded = false;
   late String emailUrl;
   late UserConnection userConnection;
   late ConnectionManager _connectionManager;
@@ -41,9 +42,16 @@ class _ContactTileState extends State<ContactTile> {
     widget._tabController?.index=0;
   }
 
+  void removeUserConnection(){
+    setState(() {
+      ConnectionManager.DisconnectUserFrom(GlobalState().getCurrentUser(), widget.user);
+    });
+    widget._tabController?.index=1;
+  }
+
   void _toggleAddConnectionButton() {
     setState(() {
-      isAdded = !isAdded;
+      //isAdded = !isAdded;
 
       //userConnection = new UserConnection(primaryUserId: primaryUserId, foreignUserId: widget.user.id); // Missing current account user id, needs a global state for it.
 
@@ -118,15 +126,22 @@ class _ContactTileState extends State<ContactTile> {
             child: SizedBox(
               width: 118,
               height: 20,
-              child: FilledButton(
+              child: !widget.connected ? FilledButton(
                 onPressed: addUserConnection,
                 style: FilledButton.styleFrom(
-                  backgroundColor: isAdded
-                      ? Colors.green
-                      : Theme.of(context).primaryColor, // Default color
+                  backgroundColor: Colors.green // Default color
                 ),
                 child: Text(
-                  isAdded ? "Connected" : "Add",
+                  "Add",
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ) : FilledButton(
+                onPressed: removeUserConnection,
+                style: FilledButton.styleFrom(
+                    backgroundColor: Colors.red // Default color
+                ),
+                child: Text(
+                  "Remove",
                   style: const TextStyle(color: Colors.white),
                 ),
               ),

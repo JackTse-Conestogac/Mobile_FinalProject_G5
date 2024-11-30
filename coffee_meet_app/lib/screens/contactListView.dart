@@ -11,7 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ContactListView extends StatefulWidget {
   @override
   State<ContactListView> createState() => _ContactListViewState();
-
+  ContactListView(this.tabController,{super.key});
+  final TabController tabController;
   static const icon = Icons.contacts;
   static const text = "Contacts";
 }
@@ -62,7 +63,7 @@ class _ContactListViewState extends State<ContactListView> {
             return ListView.builder(
               itemCount: users.length,
               itemBuilder: (context, index) {
-                return ContactTile(users[index]);
+                return ContactTile.wController(users[index],widget.tabController,connected: true,);
               },
             );
           }
