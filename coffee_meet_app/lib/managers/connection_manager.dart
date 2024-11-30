@@ -19,8 +19,13 @@ class ConnectionManager {
     await ConnectionLocalStorageManager.setUserConnection(userConnect);
   }
 
-  Future<void> disconnectUser(int userConnectionId) async {
+  static Future<void> disconnectUser(int userConnectionId) async {
     await ConnectionLocalStorageManager.deleteUserConnection(userConnectionId);
+  }
+
+  static Future<void> DisconnectUserFrom(User primary, User secondary) async {
+    List<UserConnection> connections = await ConnectionLocalStorageManager.getUserConnectionList();
+    disconnectUser(connections.firstWhere((c)=>c.primaryUserId==primary.id && c.foreignUserId==secondary.id).connectionId);
   }
 
   //Put this in the ConnectionManager, but it might fit better under user.
