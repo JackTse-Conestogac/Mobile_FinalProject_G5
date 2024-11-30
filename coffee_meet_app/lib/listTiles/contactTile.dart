@@ -84,7 +84,7 @@ class _ContactTileState extends State<ContactTile> {
           Padding(
             padding: const EdgeInsets.all(3.0),
             child: SizedBox(
-              width: 100,
+              width: 118,
               height: 20,
               child: FilledButton(
                 onPressed: () {
@@ -103,7 +103,7 @@ class _ContactTileState extends State<ContactTile> {
           Padding(
             padding: const EdgeInsets.all(3.0),
             child: SizedBox(
-              width: 100,
+              width: 118,
               height: 20,
               child: FilledButton(
                 onPressed: _toggleAddConnectionButton,

@@ -1,9 +1,11 @@
+import 'package:coffee_meet_app/entities/GlobalState.dart';
+
 import 'User.dart';
 import '../enum/event_location.dart';
 
 class Event {
   int eventId;
-  int hostId;
+  int hostId = GlobalState().getCurrentUser().id;
   String eventName;
   DateTime startDate;
   String description;
@@ -29,6 +31,7 @@ class Event {
       "eventLocation": this.eventLocationStatus,
     };
   }
+
   // fromJSON method - convert JSON into a Product object
   Event.fromJSON(Map<String, dynamic> json):
         this.eventId = json["eventId"],

@@ -10,17 +10,22 @@ class EventLocalStorageManager {
 
   // To create event
   static Future<void> setEvent(Event event) async {
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    try {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      List<Map<String, dynamic>> eventList = await _getEventList();
 
-    List<Map<String, dynamic>> eventList = await _getEventList();
-    eventList.removeWhere((u) => u['id'] == event.eventId);
-    eventList.add(event.toJSON());
+      // Update or add the event
+      eventList.removeWhere((e) => e['id'] == event.eventId);
+      eventList.add(event.toJSON());
 
-    await localStorage.setString(_eventListkey, jsonEncode(eventList));
-
-    // Debugging: Print the user list to verify
-    print("Event list after saving: ${jsonEncode(eventList)}");
+      await localStorage.setString(_eventListkey, jsonEncode(eventList));
+      print("Event list after saving: ${jsonEncode(eventList)}");
+    } catch (e) {
+      print("Error in setEvent: $e");
+      rethrow;
+    }
   }
+
 
   // To read all events
   static Future<List<Event>> getEventList() async {

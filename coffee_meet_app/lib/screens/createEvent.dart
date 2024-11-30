@@ -1,9 +1,15 @@
+import 'package:coffee_meet_app/entities/GlobalState.dart';
+import 'package:coffee_meet_app/enum/event_location.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:coffee_meet_app/listTiles/eventTile.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee_meet_app/managers/event_manager.dart';
+import 'package:coffee_meet_app/entities/Event.dart';
+import 'package:coffee_meet_app/screens/TabListScreens.dart';
 
 class CreateEventScreen extends StatefulWidget {
+
+
   const CreateEventScreen({super.key});
 
   @override
@@ -17,18 +23,74 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   final TextEditingController _dateController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final EventManager _eventManager = EventManager();
-
-
+  String _eventError = "";
   String _selectedOption ='';
 
-  void _saveEvent() {
+EventLocation _getEventLocation(String location){
+  EventLocation eventLocation = EventLocation.indoor;
+
+  switch(location){
+    case "Indoors":
+      eventLocation = EventLocation.indoor;
+      break;
+    case "Outdoors":
+      eventLocation = EventLocation.outdoor;
+      break;
+    case "Others":
+      eventLocation = EventLocation.others;
+      break;
+  }
+
+  return eventLocation;
+}
+
+  Future<void> _saveEvent() async {
     if (_formKey.currentState!.validate()) {
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Event saved successfully!')),
-      );
+      try {
+        Event _event = Event(
+          eventId: 0,
+          hostId: GlobalState().getCurrentUser().id,
+          eventName: _titleController.text,
+          startDate: DateTime.parse(_dateController.text),
+          description: _descriptionController.text,
+          eventLocationStatus: _getEventLocation(_selectedOption),
+        );
+
+
+        // Save event
+        await _eventManager.addEvent(_event);
+
+        // Fetch all events for debug
+        List<Event> allEvents = await EventManager.viewAllEvents();
+        // Show total event count
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Event saved successfully! Total events: ${allEvents.length}',
+            ),
+          ),
+        );
+
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) =>
+                TabListScreen(user: GlobalState().getCurrentUser()),
+          ),
+        );
+
+      } catch (e) {
+        setState(() {
+          _eventError = e.toString();
+        });
+      }
     }
+
+
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -185,7 +247,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
               style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.purple,
                   foregroundColor: Colors.white,
-                  textStyle: TextStyle(fontSize: 30)
+                  textStyle: TextStyle(fontSize: 32)
               ),
               child: const Text('Save'),
             ),

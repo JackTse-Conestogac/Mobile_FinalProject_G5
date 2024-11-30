@@ -10,7 +10,8 @@ class UserManager {
 
   // Fetch all users from local storage
   static Future<List<User>> viewAllUsers() async {
-    return await UserLocalStorageManager.getUserList();
+    List<User> userList = await UserLocalStorageManager.getUserList();
+    return userList;
   }
 
   // CHANGE: Fetch user by email and password

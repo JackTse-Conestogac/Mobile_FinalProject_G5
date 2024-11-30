@@ -5,6 +5,7 @@ import '../entities/User.dart';
 import '../entities/temporaryTestingEntities.dart';
 import '../listTiles/eventTile.dart';
 import '../managers/connection_manager.dart';
+import '../managers/event_manager.dart';
 
 class AttendingEventView extends StatefulWidget {
   @override
@@ -22,12 +23,12 @@ class _AttendingEventViewState extends State<AttendingEventView> {
   @override
   void initState() {
     super.initState();
-    _userEvents=ConnectionManager.getEventsForUser(widget.user);
+    _userEvents=EventManager.getEventsForUser(widget.user);
   }
 
   void refreshEvents(){
     setState(() {
-      _userEvents=ConnectionManager.getEventsForUser(widget.user);
+      _userEvents=EventManager.getEventsForUser(widget.user);
     });
   }
 

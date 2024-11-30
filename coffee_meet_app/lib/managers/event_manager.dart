@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../managers/event_local_storage_manager.dart';
+import '../managers/connection_local_storage_manager.dart';
 import '../entities/Event.dart';
+import '../entities/User.dart';
+import '../entities/Connection.dart';
+
 
 
 class EventManager {
@@ -13,17 +17,25 @@ class EventManager {
 
 
   Future<void> addEvent(Event event) async {
-    int newId = await EventLocalStorageManager.generateEventId();
-    event = Event(
-      eventId: newId,
-      hostId: event.hostId,
-      eventName: event.eventName,
-      startDate: event.startDate,
-      description: event.description,
-      eventLocationStatus:  event.eventLocationStatus,
-    );
-    await EventLocalStorageManager.setEvent(event);
+    try {
+      int newId = await EventLocalStorageManager.generateEventId();
+      event = Event(
+        eventId: newId,
+        hostId: event.hostId,
+        eventName: event.eventName,
+        startDate: event.startDate,
+        description: event.description,
+        eventLocationStatus: event.eventLocationStatus,
+      );
+
+      await EventLocalStorageManager.setEvent(event);
+      print("Event added successfully: ${event.toJSON()}");
+    } catch (e) {
+      print("Error in addEvent: $e");
+      rethrow;
+    }
   }
+
 
 
   Future<void> editUser(int eventId, Event updatedEvent) async {
@@ -80,6 +92,51 @@ class EventManager {
     );
 
     return "${fullDateTime.toIso8601String().split('T')[0]} ${selectedTime.format(context)}";
+  }
+
+
+  //Put this in the ConnectionManager, but it might fit better under user or event.
+  // If inverted it returns only the events WITHOUT the connection
+  static Future<List<Event>> getEventsForUser(User user,
+      {bool inverted = false}) async {
+
+    List<EventConnection> eventConnectionList =
+    await ConnectionLocalStorageManager.getEventConnectionList();
+
+    List<Event> events = await EventManager.viewAllEvents();
+
+    List<Event> userEvents = eventConnectionList
+        .where((c1) => c1.userId == user.id)
+        .map((c2) => events.firstWhere((e) => e.eventId == c2.eventId))
+        .toList();
+
+    if (!inverted) {
+      return userEvents;
+    } else {
+      return events.where((e) => !userEvents.contains(e)).toList();
+    }
+
+    // if (!inverted) {
+    //   List<User> contacts = await getContactsForUser(user);
+    //   for (User contact in contacts) {
+    //     List<Event> contactEvents = EventConnection
+    //         .where((c) => c.userId == contact.id)
+    //         .map((c) => events.firstWhere((e) => e.eventId == c.eventId))
+    //         .toList();
+    //     userEvents.addAll(contactEvents);
+    //   }
+    // }
+  }
+
+  Future<void> shareEventWithUsers(Event event, List<int> userIds) async {
+    for (int userId in userIds) {
+      EventConnection connection = EventConnection(
+        connectionId: 0,
+        eventId: event.eventId,
+        userId: userId,
+      );
+      await ConnectionLocalStorageManager.setEventConnection(connection);
+    }
   }
 }
 

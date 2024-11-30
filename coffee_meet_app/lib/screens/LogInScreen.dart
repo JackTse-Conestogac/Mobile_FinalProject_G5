@@ -1,3 +1,4 @@
+import 'package:coffee_meet_app/entities/GlobalState.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee_meet_app/screens/createUser.dart';
 import 'package:coffee_meet_app/screens/TabListScreens.dart';
@@ -20,6 +21,7 @@ class _LogInScreenState extends State<LogInScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   UserManager _userManager = UserManager();
+  GlobalState _globalState = GlobalState();
   String? _emailError;
   String? _passwordError;
 
@@ -92,18 +94,16 @@ class _LogInScreenState extends State<LogInScreen> {
       _passwordController.text,
     );
 
-    // if (loggedInUser == null) {
-    //   setState(() {
-    //     // _emailError = 'Invalid email or password';
-    //   });
-    //   return;
-    // }
+    // Set current user in global state
+    if (loggedInUser != null) {
+      _globalState.setCurrentUser(loggedInUser);
+    }
 
     // If both validations pass, navigate to the next screen
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => TabListScreen(user: loggedInUser), // Pass the User object
+        builder: (context) => TabListScreen(user: _globalState.getCurrentUser()), // Pass the User object
       ),
     );
   }

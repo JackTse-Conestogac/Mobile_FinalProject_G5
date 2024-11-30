@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import '../entities/Event.dart';
 import '../entities/User.dart';
 import '../listTiles/eventTile.dart';
+import '../entities/GlobalState.dart';
 
 class EventListView extends StatefulWidget {
   @override
@@ -22,17 +23,23 @@ class _EventListViewState extends State<EventListView> {
   //not to signify that it is inverted
   late Future<List<Event>> _UserNOTevents;
 
+  void _fetchEvents(){
+    User currentUser = GlobalState().getCurrentUser();
+    _UserNOTevents= EventManager.getEventsForUser(currentUser, inverted: true);
+
+  }
+
   @override
   void initState() {
     super.initState();
-    _UserNOTevents=ConnectionManager.getEventsForUser(widget.user, inverted: true);
+    _fetchEvents();
   }
 
-  void refreshEvents(){
-    setState(() {
-      _UserNOTevents=ConnectionManager.getEventsForUser(widget.user, inverted: true);
-    });
-  }
+  // void refreshEvents(){
+  //   setState(() {
+  //     _UserNOTevents = EventManager.getEventsForUser(widget.user, inverted: true);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
