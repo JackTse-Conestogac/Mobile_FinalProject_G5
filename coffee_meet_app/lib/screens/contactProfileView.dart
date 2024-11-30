@@ -1,4 +1,3 @@
-import 'package:coffee_meet_app/entities/temporaryTestingEntities.dart';
 import 'package:flutter/material.dart';
 import '../entities/User.dart';
 

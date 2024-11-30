@@ -2,6 +2,7 @@ import 'package:coffee_meet_app/managers/user_manager.dart';
 import 'package:coffee_meet_app/screens/createUser.dart';
 import 'package:coffee_meet_app/screens/eventListView.dart';
 import 'package:coffee_meet_app/screens/createEvent.dart';
+import 'package:coffee_meet_app/screens/strangerListView.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee_meet_app/entities/User.dart';
 
@@ -24,7 +25,7 @@ class _TabListScreenState extends State<TabListScreen> with SingleTickerProvider
   // provide itself to TabController.vsync for to be used for animations
   // -- Reading further "mixin"s seem to be Interfaces with default implementation
   // Which Java has had for ages, and didn't feel the need to give a stupid name
-  late final _tabController = TabController(length: 3, vsync: this);
+  late final _tabController = TabController(length: 4, vsync: this);
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,10 @@ class _TabListScreenState extends State<TabListScreen> with SingleTickerProvider
                 Tab(
                   icon: Icon(ContactListView.icon),
                   text: ContactListView.text,
+                ),
+                Tab(
+                  icon:Icon(StrangerListView.icon),
+                  text: StrangerListView.text,
                 ),
                 Tab(
                   icon:Icon(AttendingEventView.icon),
@@ -54,6 +59,7 @@ class _TabListScreenState extends State<TabListScreen> with SingleTickerProvider
             controller: _tabController,
             children: [
             ContactListView(),
+            StrangerListView(),
             AttendingEventView(user: widget.user),
             EventListView(user:widget.user),
           ],
