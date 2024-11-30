@@ -14,6 +14,8 @@ class StrangerListView extends StatefulWidget {
 
   static const icon = Icons.person;
   static const text = "Other Users";
+  final TabController tabController;
+  StrangerListView (this.tabController, {super.key});
 }
 
 class _StrangerListViewState extends State<StrangerListView> {
@@ -62,7 +64,7 @@ class _StrangerListViewState extends State<StrangerListView> {
             return ListView.builder(
               itemCount: users.length,
               itemBuilder: (context, index) {
-                return ContactTile(users[index]);
+                return ContactTile.wController(users[index],widget.tabController);
               },
             );
           }

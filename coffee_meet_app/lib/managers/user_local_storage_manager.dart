@@ -27,7 +27,7 @@ class UserLocalStorageManager{
       List<Map<String, dynamic>> userList = await _getUserList();
 
       // Debugging: Print the retrieved user list
-      print("Retrieved user list: ${jsonEncode(userList)}");
+      //print("Retrieved user list: ${jsonEncode(userList)}");
 
       return userList.map((userJson) => User.fromJSON(userJson)).toList();
     }

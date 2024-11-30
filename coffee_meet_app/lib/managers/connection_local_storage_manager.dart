@@ -15,7 +15,7 @@ class ConnectionLocalStorageManager {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
 
       List<Map<String, dynamic>> userConnectionList = await _getUserConnectionList();
-      userConnectionList.removeWhere((u) => u['id'] == userConnection.connectionId);
+      userConnectionList.removeWhere((u) => u['connectionId'] == userConnection.connectionId);
       userConnectionList.add(userConnection.toJSON());
 
       await localStorage.setString(_userConnectionKey, jsonEncode(userConnectionList));
@@ -26,7 +26,7 @@ class ConnectionLocalStorageManager {
       List<Map<String, dynamic>> userList = await _getUserConnectionList();
 
       // Remove user connection with the given ID
-      userList.removeWhere((u) => u['id'] == connectionId);
+      userList.removeWhere((u) => u['connectionId'] == connectionId);
 
       // Update the local storage
       localStorage.setString(_userConnectionKey, jsonEncode(userList));
@@ -42,7 +42,8 @@ class ConnectionLocalStorageManager {
       }
 
       // Find the highest existing ID and add 1
-      int maxId = userList.map((u) => u['id'] as int).reduce((a, b) => a > b ? a : b);
+      int maxId = userList.map((u) => u['connectionId'] as int).reduce((a, b) => a > b ? a : b);
+      print("Generating ID ${maxId+1}");
       return maxId + 1;
     }
 
@@ -54,7 +55,6 @@ class ConnectionLocalStorageManager {
       if (encodedJson == null) {
         return [];
       }
-
       List<dynamic> decodedJson = jsonDecode(encodedJson);
       return List<Map<String, dynamic>>.from(decodedJson);
     }
@@ -67,6 +67,7 @@ class ConnectionLocalStorageManager {
 
     static Future<List<UserConnection>> getUserConnectionList() async{
       List<Map<String, dynamic>> userList = await _getUserConnectionList();
+      print("retrieved userConnections ${jsonEncode(userList)}");
       return userList.map((userConnectionJson) => UserConnection.fromJSON(userConnectionJson)).toList();
     }
 
@@ -77,7 +78,7 @@ class ConnectionLocalStorageManager {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
 
       List<Map<String, dynamic>> eventConnectionList = await _getEventConnectionList();
-      eventConnectionList.removeWhere((u) => u['id'] == eventConnection.connectionId);
+      eventConnectionList.removeWhere((u) => u['connectionId'] == eventConnection.connectionId);
       eventConnectionList.add(eventConnection.toJSON());
 
       await localStorage.setString(_eventConnectionKey, jsonEncode(eventConnectionList));
@@ -88,7 +89,7 @@ class ConnectionLocalStorageManager {
       List<Map<String, dynamic>> eventConnectionList = await _getEventConnectionList();
 
       // Remove user with the given ID
-      eventConnectionList.removeWhere((u) => u['id'] == connectionId);
+      eventConnectionList.removeWhere((u) => u['connectionId'] == connectionId);
 
       // Update the local storage
       localStorage.setString(_eventConnectionKey, jsonEncode(eventConnectionList));
@@ -104,7 +105,7 @@ class ConnectionLocalStorageManager {
       }
 
       // Find the highest existing ID and add 1
-      int maxId = userList.map((u) => u['id'] as int).reduce((a, b) => a > b ? a : b);
+      int maxId = userList.map((u) => u['connectionId'] as int).reduce((a, b) => a > b ? a : b);
       return maxId + 1;
     }
 
