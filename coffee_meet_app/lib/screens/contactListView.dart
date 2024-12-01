@@ -46,9 +46,6 @@ class _ContactListViewState extends State<ContactListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(ContactListView.text),
-      ),
       body: FutureBuilder<List<User>>(
         future: _users, // Use the Future here
         builder: (context, snapshot) {

@@ -1,36 +1,32 @@
 import 'package:flutter/material.dart';
 import '../entities/User.dart';
 
-class ContactProfileView extends StatefulWidget {
+class BlogApiScreen extends StatefulWidget {
   // Properties
-  final User user;
-  const ContactProfileView({Key? key, required this.user}) : super(key: key);
 
-  static const String titleText = "Profile";
+  const BlogApiScreen({Key? key}) : super(key: key);
+
+  //static const
 
   @override
-  State<ContactProfileView> createState() => _ContactProfileViewState();
+  State<BlogApiScreen> createState() => _BlogApiScreenState();
 }
 
-class _ContactProfileViewState extends State<ContactProfileView> {
-
+class _BlogApiScreenState extends State<BlogApiScreen> {
   @override
   Widget build(BuildContext context) {
-    final user = widget.user; // Access the passed user object
+ // Access the passed user object
 
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          title: Text("${user.name} "+ContactProfileView.titleText),
+          title: const Text('Blog API Search'),
         ),
         body:
         Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.network('https://picsum.photos/250?image=9'),
-            Text("occupation: ${user.occupation}"),
-            Text("Email: ${user.email}"),
-            Text("Phone: ${user.phone}"),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

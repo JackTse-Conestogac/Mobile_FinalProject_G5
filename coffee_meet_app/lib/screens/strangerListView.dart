@@ -47,9 +47,6 @@ class _StrangerListViewState extends State<StrangerListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(StrangerListView.text),
-      ),
       body: FutureBuilder<List<User>>(
         future: _users, // Use the Future here
         builder: (context, snapshot) {
