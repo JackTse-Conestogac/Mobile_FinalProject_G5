@@ -70,7 +70,7 @@ class _ContactTileState extends State<ContactTile> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(Icons.person),
+      leading: Icon(Icons.person, size: 40),
       title: Text(widget.user.name),
       subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -79,16 +79,7 @@ class _ContactTileState extends State<ContactTile> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(widget.user.occupation),
-              IconButton(
-                onPressed: () async {
-                  final Uri emailUri = Uri(
-                    scheme: 'mailto',
-                    path: emailUrl,
-                  );
-                    await launchUrl(emailUri);
-                },
-                icon: Icon(Icons.mail),
-              ),
+
               //Text("Contact"),
               // IconButton(
               //   icon: Icon(Icons.delete),
@@ -100,52 +91,39 @@ class _ContactTileState extends State<ContactTile> {
           ),
         ],
       ),
-      trailing: Column(
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(3.0),
-            child: SizedBox(
-              width: 118,
-              height: 20,
-              child: FilledButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ContactProfileView(user: widget.user),
-                    ),
-                  );
-                },
-                child: Text("View"),
-              ),
-            ),
+          IconButton(
+            onPressed: () async {
+              final Uri emailUri = Uri(
+                scheme: 'mailto',
+                path: emailUrl,
+              );
+              await launchUrl(emailUri);
+            },
+            icon: Icon(Icons.mail, size: 30),
           ),
-          Padding(
-            padding: const EdgeInsets.all(3.0),
-            child: SizedBox(
-              width: 118,
-              height: 20,
-              child: !widget.connected ? FilledButton(
-                onPressed: addUserConnection,
-                style: FilledButton.styleFrom(
-                  backgroundColor: Colors.green // Default color
+          // View Icon
+          IconButton(
+            icon: Icon(Icons.visibility, size: 30, color: Colors.blue), // 查看图标
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ContactProfileView(user: widget.user),
                 ),
-                child: Text(
-                  "Add",
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ) : FilledButton(
-                onPressed: removeUserConnection,
-                style: FilledButton.styleFrom(
-                    backgroundColor: Colors.red // Default color
-                ),
-                child: Text(
-                  "Remove",
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ),
+              );
+            },
+          ),
+          // Add/Remove Icon
+          IconButton(
+            icon: Icon(
+              widget.connected ? Icons.remove : Icons.add,
+              size: 30,
+              color: widget.connected ? Colors.red : Colors.green,
             ),
+            onPressed: widget.connected ? removeUserConnection : addUserConnection,
           ),
         ],
       ),
