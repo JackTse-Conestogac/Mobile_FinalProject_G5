@@ -27,6 +27,8 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
   String _eventError = "";
   String _selectedOption ='';
 
+  bool _isPublic = true;
+
 
   EventLocation _getEventLocation(String location){
   EventLocation eventLocation = EventLocation.indoor;
@@ -81,6 +83,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
           startDate: _dateController.text,
           description: _descriptionController.text,
           eventLocationStatus: _getEventLocation(_selectedOption),
+          isPublic: _isPublic
         );
 
         print("Event object created: $_event");
@@ -132,8 +135,8 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                 hintText: 'Enter the event title',
                 border: OutlineInputBorder(),
               ),
-              validator: (value){
-                if(value == null ||value.isEmpty){
+              validator: (value) {
+                if (value == null || value.isEmpty) {
                   return 'Title is required';
                 }
                 return null;
@@ -150,8 +153,8 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                 hintText: 'Event address',
                 border: OutlineInputBorder(),
               ),
-              validator: (value){
-                if(value == null ||value.isEmpty){
+              validator: (value) {
+                if (value == null || value.isEmpty) {
                   return 'Address is required';
                 }
                 return null;
@@ -169,18 +172,19 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                 border: OutlineInputBorder(),
               ),
               readOnly: true,
-              onTap: () async{
-                    String? selectedDateTime = await _eventManager.selectDateTime(context);
+              onTap: () async {
+                String? selectedDateTime = await _eventManager.selectDateTime(
+                    context);
 
-                    if(selectedDateTime != null){
-                      setState(() {
-                        _dateController.text = selectedDateTime;
-                      });
-                      print("Selected date and time: $selectedDateTime");
-                    }
-                },
-              validator: (value){
-                if(value == null || value.isEmpty){
+                if (selectedDateTime != null) {
+                  setState(() {
+                    _dateController.text = selectedDateTime;
+                  });
+                  print("Selected date and time: $selectedDateTime");
+                }
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
                   return 'Date and time are required';
                 }
                 return null;
@@ -259,18 +263,35 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
-          Center(
-            child: ElevatedButton(
-              onPressed: _saveEvent,
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
-                  foregroundColor: Colors.white,
-                  textStyle: TextStyle(fontSize: 32)
-              ),
-              child: const Text('Save'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Public Event?',
+                  style: TextStyle(fontSize: 25),
+                ),
+                Switch(
+                  value: _isPublic,
+                  onChanged: (value) {
+                    setState(() {
+                      _isPublic = value;
+                    });
+                  },
+                ),
+              ],
             ),
-          ),
+            const SizedBox(height: 8),
+            Center(
+              child: ElevatedButton(
+                onPressed: _saveEvent,
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple,
+                    foregroundColor: Colors.white,
+                    textStyle: TextStyle(fontSize: 32)
+                ),
+                child: const Text('Save'),
+              ),
+            ),
           ],
         ),
       ),

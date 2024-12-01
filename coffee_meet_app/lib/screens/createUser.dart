@@ -266,7 +266,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
           ),
           CheckboxListTile(
             title: const Text(
-              'Available?',
+              'Available？',
               style: TextStyle(fontSize: 20),
             ),
             value: _isAvailable,

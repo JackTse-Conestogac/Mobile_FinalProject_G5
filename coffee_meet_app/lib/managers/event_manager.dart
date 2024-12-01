@@ -26,6 +26,7 @@ class EventManager {
         startDate: event.startDate,
         description: event.description,
         eventLocationStatus: event.eventLocationStatus,
+        isPublic: event.isPublic
       );
 
       await EventLocalStorageManager.setEvent(event);

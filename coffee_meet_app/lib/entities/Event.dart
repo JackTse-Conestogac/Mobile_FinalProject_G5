@@ -10,6 +10,7 @@ class Event {
   String startDate;
   String description;
   EventLocation eventLocationStatus ;
+  bool isPublic;
 
 
   Event({
@@ -19,6 +20,7 @@ class Event {
     required this.startDate,
     required this.description,
     required this.eventLocationStatus,
+    required this.isPublic,
   });
 
   // toJSON method - convert a Product object into JSON
@@ -29,6 +31,7 @@ class Event {
       "startDate":this.startDate,
       "description": this.description,
       "eventLocation": this.eventLocationStatus.name,
+      "isPublic": this.isPublic,
     };
   }
 
@@ -41,5 +44,6 @@ class Event {
         this.description = json["description"],
         this.eventLocationStatus = EventLocation.values.firstWhere(
   (e) => e.name == json["eventLocation"], // Deserialize string to enum
-  orElse: () => EventLocation.indoor,);
-}
+  orElse: () => EventLocation.indoor,),
+        this.isPublic = json["isPublic"];
+  }
