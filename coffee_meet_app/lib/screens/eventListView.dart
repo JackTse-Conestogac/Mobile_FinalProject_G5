@@ -14,9 +14,9 @@ class EventListView extends StatefulWidget {
 
   static const icon = Icons.edit_calendar;
   static const text = "Events";
-  final User user;
+  final TabController tabController;
 
-  const EventListView({super.key, required this.user});
+  const EventListView(this.tabController, {super.key,});
 }
 
 class _EventListViewState extends State<EventListView> {
@@ -61,7 +61,7 @@ class _EventListViewState extends State<EventListView> {
             return ListView.builder(
               itemCount: events.length,
               itemBuilder: (context, index) {
-                return EventTile(events[index]);
+                return EventTile(events[index],widget.tabController,);
               },
             );
           }

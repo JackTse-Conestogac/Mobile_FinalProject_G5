@@ -1,3 +1,4 @@
+import 'package:coffee_meet_app/entities/GlobalState.dart';
 import 'package:flutter/material.dart';
 
 import '../entities/Event.dart';
@@ -13,8 +14,8 @@ class AttendingEventView extends StatefulWidget {
 
   static const icon = Icons.watch_later;
   static const text = "Attending";
-  final User user;
-  const AttendingEventView({super.key, required this.user});
+  final TabController tabController;
+  const AttendingEventView(this.tabController, {super.key});
 }
 
 class _AttendingEventViewState extends State<AttendingEventView> {
@@ -23,12 +24,12 @@ class _AttendingEventViewState extends State<AttendingEventView> {
   @override
   void initState() {
     super.initState();
-    _userEvents=EventManager.getEventsForUser(widget.user);
+    _userEvents=EventManager.getEventsForUser(GlobalState().getCurrentUser());
   }
 
   void refreshEvents(){
     setState(() {
-      _userEvents=EventManager.getEventsForUser(widget.user);
+      _userEvents=EventManager.getEventsForUser(GlobalState().getCurrentUser());
     });
   }
 
@@ -52,7 +53,7 @@ class _AttendingEventViewState extends State<AttendingEventView> {
             return ListView.builder(
               itemCount: events.length,
               itemBuilder: (context, index) {
-                return EventTile(events[index]);
+                return EventTile(events[index],widget.tabController,connected: true,);
               },
             );
           }

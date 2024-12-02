@@ -33,7 +33,7 @@ class EventLocalStorageManager {
     List<Map<String, dynamic>> eventList = await _getEventList();
 
     // Debugging: Print the retrieved user list
-    print("Retrieved event list: ${jsonEncode(eventList)}");
+    //print("Retrieved event list: ${jsonEncode(eventList)}");
 
     return eventList.map((eventJson) => Event.fromJSON(eventJson)).toList();
   }

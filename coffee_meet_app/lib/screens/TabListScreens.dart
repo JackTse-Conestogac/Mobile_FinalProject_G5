@@ -70,8 +70,8 @@ class _TabListScreenState extends State<TabListScreen> with SingleTickerProvider
         children: [
           ContactListView(_tabController),
           StrangerListView(_tabController),
-          AttendingEventView(user: widget.user),
-          EventListView(user: widget.user),
+          AttendingEventView(_tabController),
+          EventListView(_tabController),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

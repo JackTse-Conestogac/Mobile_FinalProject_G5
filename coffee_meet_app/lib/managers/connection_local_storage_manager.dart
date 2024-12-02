@@ -87,8 +87,8 @@ class ConnectionLocalStorageManager {
     static Future<void> deleteEventConnection(int connectionId) async {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
       List<Map<String, dynamic>> eventConnectionList = await _getEventConnectionList();
-
-      // Remove user with the given ID
+      print("Removing EventConnection: ${connectionId}");
+      // Remove connection with the given ID
       eventConnectionList.removeWhere((u) => u['connectionId'] == connectionId);
 
       // Update the local storage

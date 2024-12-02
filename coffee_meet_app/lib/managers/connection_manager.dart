@@ -46,18 +46,26 @@ class ConnectionManager {
     }
   }
 
-  Future<void> connectEvent(EventConnection eventConnect) async {
+  static Future<void> connectEvent(User user, Event event) async {
     int newId = await ConnectionLocalStorageManager.generatEventConectionId();
-    eventConnect = EventConnection(
-        connectionId: 0,
-        eventId: eventConnect.eventId,
-        userId: eventConnect.userId);
+    var eventConnect = EventConnection(
+        connectionId: newId,
+        eventId: event.eventId,
+        userId: user.id);
     await ConnectionLocalStorageManager.setEventConnection(eventConnect);
   }
 
-  Future<void> disconnectEvent(int eventConnectionId) async {
+  static Future<void> disconnectEvent(int eventConnectionId) async {
+    print("Disconnecting");
     await ConnectionLocalStorageManager.deleteEventConnection(
         eventConnectionId);
+  }
+
+  static Future<void> disconnectUserFromEvent(User user, Event event) async {
+
+    List<EventConnection> connections = await ConnectionLocalStorageManager.getEventConnectionList();
+    //print("TEST ${connections.firstWhere((c)=>c.userId==user.id && c.eventId==event.eventId).connectionId}");
+    disconnectEvent(connections.firstWhere((c)=>c.userId==user.id && c.eventId==event.eventId).connectionId);
   }
 
 
