@@ -1,14 +1,14 @@
 import 'package:coffee_meet_app/managers/user_manager.dart';
-import 'package:coffee_meet_app/screens/createUser.dart';
-import 'package:coffee_meet_app/screens/eventListView.dart';
-import 'package:coffee_meet_app/screens/createEvent.dart';
-import 'package:coffee_meet_app/screens/strangerListView.dart';
+import 'package:coffee_meet_app/screens/create_user_screen.dart';
+import 'package:coffee_meet_app/screens/event_list_screen.dart';
+import 'package:coffee_meet_app/screens/create_event_screen.dart';
+import 'package:coffee_meet_app/screens/stranger_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee_meet_app/entities/User.dart';
 import 'package:coffee_meet_app/screens/blog_api_screen.dart';
 
-import 'attendingEventView.dart';
-import 'contactListView.dart';
+import 'attending_event_screen.dart';
+import 'contact_list_screen.dart';
 
 class TabListScreen extends StatefulWidget {
   final User user;
@@ -47,16 +47,16 @@ class _TabListScreenState extends State<TabListScreen> with SingleTickerProvider
           controller: _tabController,
           tabs: [
             Tab(
-              icon: Icon(ContactListView.icon),
-              text: ContactListView.text,
+              icon: Icon(ContactListScreen.icon),
+              text: ContactListScreen.text,
             ),
             Tab(
               icon: Icon(StrangerListView.icon),
               text: StrangerListView.text,
             ),
             Tab(
-              icon: Icon(AttendingEventView.icon),
-              text: AttendingEventView.text,
+              icon: Icon(AttendingEventScreen.icon),
+              text: AttendingEventScreen.text,
             ),
             Tab(
               icon: Icon(EventListView.icon),
@@ -68,9 +68,9 @@ class _TabListScreenState extends State<TabListScreen> with SingleTickerProvider
       body: TabBarView(
         controller: _tabController,
         children: [
-          ContactListView(_tabController),
+          ContactListScreen(_tabController),
           StrangerListView(_tabController),
-          AttendingEventView(_tabController),
+          AttendingEventScreen(_tabController),
           EventListView(_tabController),
         ],
       ),

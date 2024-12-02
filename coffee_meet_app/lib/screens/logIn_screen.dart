@@ -1,7 +1,7 @@
 import 'package:coffee_meet_app/entities/global_state.dart';
 import 'package:flutter/material.dart';
-import 'package:coffee_meet_app/screens/createUser.dart';
-import 'package:coffee_meet_app/screens/TabListScreens.dart';
+import 'package:coffee_meet_app/screens/create_user_screen.dart';
+import 'package:coffee_meet_app/screens/tab_List_screen.dart';
 import 'package:coffee_meet_app/managers/user_manager.dart';
 import 'package:coffee_meet_app/managers/user_local_storage_manager.dart';
 import 'package:coffee_meet_app/entities/User.dart';

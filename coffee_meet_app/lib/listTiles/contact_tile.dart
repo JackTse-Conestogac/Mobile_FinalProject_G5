@@ -2,7 +2,7 @@ import 'package:coffee_meet_app/entities/connection.dart';
 import 'package:coffee_meet_app/entities/global_state.dart';
 import 'package:flutter/material.dart';
 import '../entities/User.dart';
-import '../screens/contactProfileView.dart';
+import '../screens/contact_profile_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../managers/connection_manager.dart';
 
@@ -111,7 +111,7 @@ class _ContactTileState extends State<ContactTile> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ContactProfileView(user: widget.user),
+                  builder: (context) => ContactProfileScreen(user: widget.user),
                 ),
               );
             },

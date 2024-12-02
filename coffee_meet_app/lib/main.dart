@@ -1,5 +1,5 @@
-import 'package:coffee_meet_app/screens/TabListScreens.dart';
-import 'package:coffee_meet_app/screens/LogInScreen.dart';
+import 'package:coffee_meet_app/screens/tab_List_screen.dart';
+import 'package:coffee_meet_app/screens/logIn_screen.dart';
 import 'package:flutter/material.dart';
 
 

@@ -5,19 +5,19 @@ import '../entities/global_state.dart';
 import '../listTiles/contact_tile.dart';
 import '../entities/User.dart';
 import '../managers/connection_manager.dart';
-import 'createUser.dart';
+import 'create_user_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ContactListView extends StatefulWidget {
+class ContactListScreen extends StatefulWidget {
   @override
-  State<ContactListView> createState() => _ContactListViewState();
-  ContactListView(this.tabController,{super.key});
+  State<ContactListScreen> createState() => _ContactListScreenState();
+  ContactListScreen(this.tabController,{super.key});
   final TabController tabController;
   static const icon = Icons.contacts;
   static const text = "Contacts";
 }
 
-class _ContactListViewState extends State<ContactListView> {
+class _ContactListScreenState extends State<ContactListScreen> {
   late Future<List<User>> _users; // Define Future<List<User>> to fetch data
 
   @override

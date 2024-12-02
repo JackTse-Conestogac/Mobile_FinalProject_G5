@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:coffee_meet_app/managers/event_manager.dart';
 import 'package:coffee_meet_app/managers/event_local_storage_manager.dart';
 import 'package:coffee_meet_app/entities/event.dart';
-import 'package:coffee_meet_app/screens/TabListScreens.dart';
+import 'package:coffee_meet_app/screens/tab_List_screen.dart';
 
 class CreateEventScreen extends StatefulWidget {
 

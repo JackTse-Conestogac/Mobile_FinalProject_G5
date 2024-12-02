@@ -5,7 +5,7 @@ import 'package:coffee_meet_app/managers/user_manager.dart';
 import 'package:flutter/material.dart';
 import '../listTiles/contact_tile.dart';
 import '../entities/User.dart';
-import 'createUser.dart';
+import 'create_user_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StrangerListView extends StatefulWidget {

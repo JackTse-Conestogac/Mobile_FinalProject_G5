@@ -1,7 +1,7 @@
 import 'package:coffee_meet_app/entities/global_state.dart';
-import 'package:coffee_meet_app/screens/createEvent.dart';
+import 'package:coffee_meet_app/screens/create_event_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:coffee_meet_app/screens/eventDetails.dart';
+import 'package:coffee_meet_app/screens/event_detail_screen.dart';
 import '../entities/event.dart';
 import '../managers/connection_manager.dart';
 

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import '../entities/User.dart';
 
-class ContactProfileView extends StatefulWidget {
+class ContactProfileScreen extends StatefulWidget {
   // Properties
   final User user;
-  const ContactProfileView({Key? key, required this.user}) : super(key: key);
+  const ContactProfileScreen({Key? key, required this.user}) : super(key: key);
 
   static const String titleText = "Profile";
 
   @override
-  State<ContactProfileView> createState() => _ContactProfileViewState();
+  State<ContactProfileScreen> createState() => _ContactProfileScreenState();
 }
 
-class _ContactProfileViewState extends State<ContactProfileView> {
+class _ContactProfileScreenState extends State<ContactProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class _ContactProfileViewState extends State<ContactProfileView> {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          title: Text("${user.name} "+ContactProfileView.titleText),
+          title: Text("${user.name} "+ContactProfileScreen.titleText),
         ),
         body:
         Column(

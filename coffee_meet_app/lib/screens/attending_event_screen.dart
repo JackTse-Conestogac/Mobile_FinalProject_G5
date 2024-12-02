@@ -8,17 +8,17 @@ import '../listTiles/event_tile.dart';
 import '../managers/connection_manager.dart';
 import '../managers/event_manager.dart';
 
-class AttendingEventView extends StatefulWidget {
+class AttendingEventScreen extends StatefulWidget {
   @override
-  State<AttendingEventView> createState() => _AttendingEventViewState();
+  State<AttendingEventScreen> createState() => _AttendingEventScreenState();
 
   static const icon = Icons.watch_later;
   static const text = "Attending";
   final TabController tabController;
-  const AttendingEventView(this.tabController, {super.key});
+  const AttendingEventScreen(this.tabController, {super.key});
 }
 
-class _AttendingEventViewState extends State<AttendingEventView> {
+class _AttendingEventScreenState extends State<AttendingEventScreen> {
   late Future<List<Event>> _userEvents;
 
   @override
@@ -37,7 +37,7 @@ class _AttendingEventViewState extends State<AttendingEventView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AttendingEventView.text),
+        title: Text(AttendingEventScreen.text),
       ),
       body: FutureBuilder<List<Event>>(
         future: _userEvents,
