@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../entities/User.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactProfileScreen extends StatefulWidget {
   // Properties
@@ -13,6 +14,12 @@ class ContactProfileScreen extends StatefulWidget {
 }
 
 class _ContactProfileScreenState extends State<ContactProfileScreen> {
+
+  // lanuchUrl for social media
+  Future<void> _launchUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+      await launchUrl(uri);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,18 +44,21 @@ class _ContactProfileScreenState extends State<ContactProfileScreen> {
                 IconButton(
                   onPressed: () {
                     // Link for Social Media
+                    _launchUrl(user.facebookUrl);
                   },
                   icon: Icon(Icons.facebook),
                 ),
                 IconButton(
                   onPressed: () {
                     // Link for Social Media
+                    _launchUrl(user.linkedInUrl);
                   },
                   icon: Icon(Icons.link),
                 ),
                 IconButton(
                   onPressed: () {
                     // Link for Social Media
+                    _launchUrl("mailto:${user.email}");
                   },
                   icon: Icon(Icons.email),
                 ),
