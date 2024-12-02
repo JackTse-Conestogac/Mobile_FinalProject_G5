@@ -2,8 +2,8 @@ import 'package:coffee_meet_app/managers/event_manager.dart';
 import 'package:coffee_meet_app/managers/user_manager.dart';
 
 import '../entities/User.dart';
-import '../entities/Connection.dart';
-import '../entities/Event.dart';
+import '../entities/connection.dart';
+import '../entities/event.dart';
 import '../managers/connection_local_storage_manager.dart';
 
 class ConnectionManager {

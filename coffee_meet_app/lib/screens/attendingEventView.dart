@@ -1,10 +1,10 @@
-import 'package:coffee_meet_app/entities/GlobalState.dart';
+import 'package:coffee_meet_app/entities/global_state.dart';
 import 'package:flutter/material.dart';
 
-import '../entities/Event.dart';
+import '../entities/event.dart';
 import '../entities/User.dart';
 import '../entities/temporaryTestingEntities.dart';
-import '../listTiles/eventTile.dart';
+import '../listTiles/event_tile.dart';
 import '../managers/connection_manager.dart';
 import '../managers/event_manager.dart';
 

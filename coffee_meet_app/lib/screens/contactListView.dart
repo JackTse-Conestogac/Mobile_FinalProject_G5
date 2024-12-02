@@ -1,8 +1,8 @@
 import 'package:coffee_meet_app/entities/temporaryTestingEntities.dart';
 import 'package:coffee_meet_app/managers/user_manager.dart';
 import 'package:flutter/material.dart';
-import '../entities/GlobalState.dart';
-import '../listTiles/contactTile.dart';
+import '../entities/global_state.dart';
+import '../listTiles/contact_tile.dart';
 import '../entities/User.dart';
 import '../managers/connection_manager.dart';
 import 'createUser.dart';

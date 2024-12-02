@@ -13,7 +13,7 @@ class _BlogApiScreenState extends State<BlogApiScreen> {
   final TextEditingController blogPostController = TextEditingController();
   String blogtitle = "";
   List<BlogPost> blogPosts = [];
-  String message = ""; // Message to display if there are no results
+  String message = "";
 
   @override
   void dispose() {
@@ -113,10 +113,10 @@ class _BlogApiScreenState extends State<BlogApiScreen> {
                   textAlign: TextAlign.center,
                 ),
               ),
-            if (message.isNotEmpty) const SizedBox(height: 16), // Extra spacing
+            if (message.isNotEmpty) const SizedBox(height: 16),
             Expanded(
               child: blogPosts.isEmpty
-                  ? const Center() // Keep empty space if no blogs are present
+                  ? const Center()
                   : ListView.builder(
                 itemCount: blogPosts.length,
                 itemBuilder: (context, index) {

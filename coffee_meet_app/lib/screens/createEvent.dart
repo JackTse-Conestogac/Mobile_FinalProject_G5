@@ -1,11 +1,11 @@
-import 'package:coffee_meet_app/entities/GlobalState.dart';
+import 'package:coffee_meet_app/entities/global_state.dart';
 import 'package:coffee_meet_app/enum/event_location.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:coffee_meet_app/listTiles/eventTile.dart';
+import 'package:coffee_meet_app/listTiles/event_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee_meet_app/managers/event_manager.dart';
 import 'package:coffee_meet_app/managers/event_local_storage_manager.dart';
-import 'package:coffee_meet_app/entities/Event.dart';
+import 'package:coffee_meet_app/entities/event.dart';
 import 'package:coffee_meet_app/screens/TabListScreens.dart';
 
 class CreateEventScreen extends StatefulWidget {

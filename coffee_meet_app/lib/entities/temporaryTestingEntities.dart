@@ -1,4 +1,4 @@
-import 'Event.dart';
+import 'event.dart';
 import 'User.dart';
 
 class TempEntities {

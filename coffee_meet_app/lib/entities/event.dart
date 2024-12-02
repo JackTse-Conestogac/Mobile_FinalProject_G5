@@ -1,4 +1,4 @@
-import 'package:coffee_meet_app/entities/GlobalState.dart';
+import 'package:coffee_meet_app/entities/global_state.dart';
 
 import 'User.dart';
 import '../enum/event_location.dart';

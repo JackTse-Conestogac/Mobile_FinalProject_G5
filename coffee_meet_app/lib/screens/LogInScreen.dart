@@ -1,4 +1,4 @@
-import 'package:coffee_meet_app/entities/GlobalState.dart';
+import 'package:coffee_meet_app/entities/global_state.dart';
 import 'package:flutter/material.dart';
 import 'package:coffee_meet_app/screens/createUser.dart';
 import 'package:coffee_meet_app/screens/TabListScreens.dart';

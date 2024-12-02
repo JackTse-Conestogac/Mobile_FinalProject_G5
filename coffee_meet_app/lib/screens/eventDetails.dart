@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../entities/Event.dart';
+import '../entities/event.dart';
 
 
 

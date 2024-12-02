@@ -1,4 +1,4 @@
-import 'package:coffee_meet_app/entities/Event.dart';
+import 'package:coffee_meet_app/entities/event.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';

@@ -1,5 +1,5 @@
-import 'package:coffee_meet_app/entities/Connection.dart';
-import 'package:coffee_meet_app/entities/GlobalState.dart';
+import 'package:coffee_meet_app/entities/connection.dart';
+import 'package:coffee_meet_app/entities/global_state.dart';
 import 'package:flutter/material.dart';
 import '../entities/User.dart';
 import '../screens/contactProfileView.dart';

@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../managers/event_local_storage_manager.dart';
 import '../managers/connection_local_storage_manager.dart';
-import '../entities/Event.dart';
+import '../entities/event.dart';
 import '../entities/User.dart';
-import '../entities/Connection.dart';
+import '../entities/connection.dart';
 
 
 

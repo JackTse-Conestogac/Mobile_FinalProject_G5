@@ -1,9 +1,9 @@
-import 'package:coffee_meet_app/entities/GlobalState.dart';
+import 'package:coffee_meet_app/entities/global_state.dart';
 import 'package:coffee_meet_app/entities/temporaryTestingEntities.dart';
 import 'package:coffee_meet_app/managers/connection_manager.dart';
 import 'package:coffee_meet_app/managers/user_manager.dart';
 import 'package:flutter/material.dart';
-import '../listTiles/contactTile.dart';
+import '../listTiles/contact_tile.dart';
 import '../entities/User.dart';
 import 'createUser.dart';
 import 'package:shared_preferences/shared_preferences.dart';

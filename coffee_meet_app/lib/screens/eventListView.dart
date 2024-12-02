@@ -3,10 +3,10 @@ import 'package:coffee_meet_app/managers/connection_manager.dart';
 import 'package:coffee_meet_app/managers/event_manager.dart';
 import 'package:flutter/material.dart';
 
-import '../entities/Event.dart';
+import '../entities/event.dart';
 import '../entities/User.dart';
-import '../listTiles/eventTile.dart';
-import '../entities/GlobalState.dart';
+import '../listTiles/event_tile.dart';
+import '../entities/global_state.dart';
 
 class EventListView extends StatefulWidget {
   @override
