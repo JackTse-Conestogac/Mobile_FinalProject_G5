@@ -36,9 +36,6 @@ class _AttendingEventScreenState extends State<AttendingEventScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AttendingEventScreen.text),
-      ),
       body: FutureBuilder<List<Event>>(
         future: _userEvents,
         builder: (context, snapshot) {

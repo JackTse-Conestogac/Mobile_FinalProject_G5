@@ -42,20 +42,36 @@ class _EventTileState extends State<EventTile> {
           Text(widget.event.eventName),
           Icon(Icons.image),
         ]),
-        Column(
+        Row(
           children: [
-            FilledButton(
-              onPressed: () {
+            // FilledButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => EventDetailScreen(event: widget.event),
+            //       ),
+            //     );
+            //     debugPrint("Details ${widget.event.eventName}");
+            //   },
+            //   child: Text("Details"),
+            // ),
+            IconButton(
+              icon: Icon(
+                Icons.description_outlined,
+                size: 30,
+                color: Colors.blueGrey ,
+              ),
+              onPressed: (){
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => EventDetailScreen(event: widget.event),
                   ),
                 );
-                debugPrint("Details ${widget.event.eventName}");
               },
-              child: Text("Details"),
-            ),IconButton(
+            ),
+            IconButton(
               icon: Icon(
                 widget.connected ? Icons.remove : Icons.add,
                 size: 30,
@@ -63,12 +79,12 @@ class _EventTileState extends State<EventTile> {
               ),
               onPressed: widget.connected ? removeEventConnection : addEventConnection,
             ),
-            IconButton(
-              onPressed: () {
-                debugPrint("Delete ${widget.event.eventName}");
-              },
-              icon: Icon(Icons.delete),
-            )
+            // IconButton(
+            //   onPressed: () {
+            //     debugPrint("Delete ${widget.event.eventName}");
+            //   },
+            //   icon: Icon(Icons.delete),
+            // )
           ],
         )
       ]),

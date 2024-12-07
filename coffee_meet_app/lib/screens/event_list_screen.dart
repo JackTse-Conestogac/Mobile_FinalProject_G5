@@ -44,9 +44,6 @@ class _EventListViewState extends State<EventListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(EventListView.text),
-      ),
       body: FutureBuilder<List<Event>>(
         future: _UserNOTevents,
         builder: (context, snapshot) {
