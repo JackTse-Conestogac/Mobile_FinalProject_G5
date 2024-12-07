@@ -1,4 +1,3 @@
-import 'package:coffee_meet_app/entities/temporaryTestingEntities.dart';
 import 'package:coffee_meet_app/managers/connection_manager.dart';
 import 'package:coffee_meet_app/managers/event_manager.dart';
 import 'package:flutter/material.dart';

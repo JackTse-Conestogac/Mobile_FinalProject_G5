@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../entities/event.dart';
 import '../entities/User.dart';
-import '../entities/temporaryTestingEntities.dart';
 import '../listTiles/event_tile.dart';
 import '../managers/connection_manager.dart';
 import '../managers/event_manager.dart';
