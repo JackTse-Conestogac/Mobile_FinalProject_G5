@@ -136,7 +136,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                 border: OutlineInputBorder(),
               ),
               validator: (value) {
-                if (value == null || value.isEmpty) {
+                if (value == null || value.trim().isEmpty) {
                   return 'Title is required';
                 }
                 return null;
@@ -154,7 +154,7 @@ class _CreateEventScreenState extends State<CreateEventScreen> {
                 border: OutlineInputBorder(),
               ),
               validator: (value) {
-                if (value == null || value.isEmpty) {
+                if (value == null || value.trim().isEmpty ) {
                   return 'Address is required';
                 }
                 return null;

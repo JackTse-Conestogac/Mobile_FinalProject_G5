@@ -54,7 +54,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
 
   // Name validation
   Future<String?> _isValidName(String? value) async {
-    if (value == null || value.isEmpty) {
+    if (value == null || value.trim().isEmpty) {
       return 'Name is required';
     }
     return null; // Name is valid
@@ -62,7 +62,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
 
   // Password validation
   Future<String?> _isValidPassword(String? value) async {
-    if (value == null || value.isEmpty) {
+    if (value == null || value.trim().isEmpty) {
       return 'Password is required';
     }
 
@@ -71,7 +71,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
 
   // Occupation validation
   Future<String?> _isValidOccupation(String? value) async {
-    if (value == null || value.isEmpty) {
+    if (value == null || value.trim().isEmpty) {
       return 'Occupation is required';
     }
     return null;
