@@ -3,6 +3,8 @@
         android:label="coffee_meet_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAJh6nDd9RxuKAlXOUlLzStUS4fhdjvWYA"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

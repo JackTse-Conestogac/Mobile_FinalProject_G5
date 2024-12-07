@@ -9,6 +9,7 @@ import 'package:coffee_meet_app/screens/blog_api_screen.dart';
 
 import 'attending_event_screen.dart';
 import 'contact_list_screen.dart';
+import 'map_screen.dart';
 
 class TabListScreen extends StatefulWidget {
   final User user;
@@ -23,6 +24,9 @@ class _TabListScreenState extends State<TabListScreen> with SingleTickerProvider
   int _selectedIndex = 1;
 
   void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
     if (index == 0) {
       Navigator.push(
         context,
@@ -30,11 +34,13 @@ class _TabListScreenState extends State<TabListScreen> with SingleTickerProvider
           builder: (context) => BlogApiScreen(),
         ),
       );
-    } else {
-
-      setState(() {
-        _selectedIndex = index;
-      });
+    } else if(index==2) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MapScreen(),
+        ),
+      );
     }
   }
 
@@ -86,6 +92,10 @@ class _TabListScreenState extends State<TabListScreen> with SingleTickerProvider
             icon: Icon(Icons.home),
             label: 'Home',
           ),
+          BottomNavigationBarItem(
+            icon:Icon(Icons.map),
+            label:'Map',
+          )
         ],
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.blue,
