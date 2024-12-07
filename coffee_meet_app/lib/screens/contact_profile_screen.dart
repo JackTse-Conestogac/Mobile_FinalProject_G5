@@ -35,9 +35,9 @@ class _ContactProfileScreenState extends State<ContactProfileScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Image.network('https://picsum.photos/250?image=9'),
-            Text("occupation: ${user.occupation}"),
-            Text("Email: ${user.email}"),
-            Text("Phone: ${user.phone}"),
+            Text("Occupation: ${user.occupation}",style: TextStyle(fontSize: 25) ),
+            Text("Email: ${user.email}", style: TextStyle(fontSize: 25)),
+            Text("Phone: ${user.phone}", style: TextStyle(fontSize: 25)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -53,7 +53,11 @@ class _ContactProfileScreenState extends State<ContactProfileScreen> {
                     // Link for Social Media
                     _launchUrl(user.linkedInUrl);
                   },
-                  icon: Icon(Icons.link),
+                  icon: Image.asset(
+                    "images/linkedin-with-circle-icon.png", // Corrected path for asset image
+                    width: 24,
+                    height: 24,
+                    ),
                 ),
                 IconButton(
                   onPressed: () {
