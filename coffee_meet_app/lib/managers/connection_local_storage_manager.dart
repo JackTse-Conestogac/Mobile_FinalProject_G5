@@ -9,7 +9,6 @@ class ConnectionLocalStorageManager {
     static const String _userConnectionKey = "USER_CONNECTION_LIST";
     static const String _eventConnectionKey = "EVENT_CONNECTION_LIST";
 
-
     /// User Connection
     static Future<void> setUserConnection(UserConnection userConnection) async{
       SharedPreferences localStorage = await SharedPreferences.getInstance();

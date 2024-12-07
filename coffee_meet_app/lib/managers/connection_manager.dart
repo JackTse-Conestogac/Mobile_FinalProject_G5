@@ -67,6 +67,4 @@ class ConnectionManager {
     //print("TEST ${connections.firstWhere((c)=>c.userId==user.id && c.eventId==event.eventId).connectionId}");
     disconnectEvent(connections.firstWhere((c)=>c.userId==user.id && c.eventId==event.eventId).connectionId);
   }
-
-
 }
