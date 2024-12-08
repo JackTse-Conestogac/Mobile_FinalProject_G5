@@ -43,11 +43,12 @@ class _LogInScreenState extends State<LogInScreen> {
     }
   }
 
-
   Future<void> _clearAllUsers() async {
     _emailError = null;
     _passwordError = null;
     await UserLocalStorageManager.clearUserList();
+    await ConnectionLocalStorageManager.clearUserConnectionList();
+    await ConnectionLocalStorageManager.clearEventConnectionList();
     print("All users have been deleted.");
   }
 
@@ -55,30 +56,9 @@ class _LogInScreenState extends State<LogInScreen> {
     _emailError = null;
     _passwordError = null;
     await EventLocalStorageManager.clearEventList();
+    await ConnectionLocalStorageManager.clearEventConnectionList();
     print("All events have been deleted.");
   }
-  Future<void> _clearUserConnections() async {
-    _emailError = null;
-    _passwordError = null;
-    await ConnectionLocalStorageManager.clearUserConnectionList();
-    print("All connections have been deleted.");
-  }
-
-  Future<void> _clearEventConnections() async {
-    _emailError = null;
-    _passwordError = null;
-    await ConnectionLocalStorageManager.clearEventConnectionList();
-    print("All connections have been deleted.");
-  }
-
-  Future<void> _clearAllConnections() async {
-    _emailError = null;
-    _passwordError = null;
-    await ConnectionLocalStorageManager.clearUserConnectionList();
-    await ConnectionLocalStorageManager.clearEventConnectionList();
-    print("All connections have been deleted.");
-  }
-
 
   // User Authoraization
   Future<void> _userAuthorization() async {
@@ -224,36 +204,6 @@ class _LogInScreenState extends State<LogInScreen> {
                     child: FilledButton(
                       onPressed: _clearAllEvents,
                       child: const Text('Clear All Events'),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Center(
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: FilledButton(
-                      onPressed: _clearUserConnections,
-                      child: const Text('Clear User Connections'),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Center(
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: FilledButton(
-                      onPressed: _clearEventConnections,
-                      child: const Text('Clear Event Connections'),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Center(
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: FilledButton(
-                      onPressed: _clearAllConnections,
-                      child: const Text('Clear All Connections'),
                     ),
                   ),
                 ),
