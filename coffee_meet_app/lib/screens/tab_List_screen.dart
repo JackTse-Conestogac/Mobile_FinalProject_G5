@@ -48,7 +48,7 @@ class _TabListScreenState extends State<TabListScreen> with SingleTickerProvider
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("${widget.user.name} UserID: ${widget.user.id}"),
+        title: Text("Welcome back, ${widget.user.name}!"),
         bottom: TabBar(
           controller: _tabController,
           tabs: [
