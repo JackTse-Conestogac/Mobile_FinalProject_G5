@@ -44,18 +44,6 @@ class _EventTileState extends State<EventTile> {
         ]),
         Row(
           children: [
-            // FilledButton(
-            //   onPressed: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //         builder: (context) => EventDetailScreen(event: widget.event),
-            //       ),
-            //     );
-            //     debugPrint("Details ${widget.event.eventName}");
-            //   },
-            //   child: Text("Details"),
-            // ),
             IconButton(
               icon: Icon(
                 Icons.description_outlined,
@@ -79,12 +67,6 @@ class _EventTileState extends State<EventTile> {
               ),
               onPressed: widget.connected ? removeEventConnection : addEventConnection,
             ),
-            // IconButton(
-            //   onPressed: () {
-            //     debugPrint("Delete ${widget.event.eventName}");
-            //   },
-            //   icon: Icon(Icons.delete),
-            // )
           ],
         )
       ]),

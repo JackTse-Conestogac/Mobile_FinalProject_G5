@@ -117,16 +117,6 @@ class EventManager {
       return events.where((e) => !userEvents.contains(e)).toList();
     }
 
-    // if (!inverted) {
-    //   List<User> contacts = await getContactsForUser(user);
-    //   for (User contact in contacts) {
-    //     List<Event> contactEvents = EventConnection
-    //         .where((c) => c.userId == contact.id)
-    //         .map((c) => events.firstWhere((e) => e.eventId == c.eventId))
-    //         .toList();
-    //     userEvents.addAll(contactEvents);
-    //   }
-    // }
   }
 
   Future<void> shareEventWithUsers(Event event, List<int> userIds) async {

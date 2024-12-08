@@ -151,7 +151,7 @@ class _LogInScreenState extends State<LogInScreen> {
                   decoration: InputDecoration(
                     hintText: 'Required',
                     border: const OutlineInputBorder(),
-                    errorText: _emailError, // Display email error message here
+                    errorText: _emailError, // Display email error message
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -165,7 +165,7 @@ class _LogInScreenState extends State<LogInScreen> {
                   decoration: InputDecoration(
                     hintText: 'Required',
                     border: const OutlineInputBorder(),
-                    errorText: _passwordError, // Display password error message here
+                    errorText: _passwordError, // Display password error message
                   ),
                   keyboardType: TextInputType.text,
                   obscureText: true, // For password fields

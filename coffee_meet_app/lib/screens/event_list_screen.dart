@@ -34,12 +34,6 @@ class _EventListViewState extends State<EventListView> {
     _fetchEvents();
   }
 
-  // void refreshEvents(){
-  //   setState(() {
-  //     _UserNOTevents = EventManager.getEventsForUser(widget.user, inverted: true);
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

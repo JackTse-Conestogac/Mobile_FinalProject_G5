@@ -49,24 +49,6 @@ class _ContactTileState extends State<ContactTile> {
     widget._tabController?.index=1;
   }
 
-  void _toggleAddConnectionButton() {
-    setState(() {
-      //isAdded = !isAdded;
-
-      //userConnection = new UserConnection(primaryUserId: primaryUserId, foreignUserId: widget.user.id); // Missing current account user id, needs a global state for it.
-
-      // if(isAdded){
-      //   _connectionManager.connectUser(userConnection);
-      //   print("User connected");
-      // }
-      // else{
-      //   _connectionManager.disconnectUser(userConnection.connectionId);
-      //   print("User disconnected");
-      // }
-
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -79,14 +61,6 @@ class _ContactTileState extends State<ContactTile> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(widget.user.occupation),
-
-              //Text("Contact"),
-              // IconButton(
-              //   icon: Icon(Icons.delete),
-              //   onPressed: () {
-              //     debugPrint("Delete ${widget.user.name}");
-              //   },
-              // ),
             ],
           ),
         ],
@@ -106,7 +80,7 @@ class _ContactTileState extends State<ContactTile> {
           ),
           // View Icon
           IconButton(
-            icon: Icon(Icons.visibility, size: 30, color: Colors.blue), // 查看图标
+            icon: Icon(Icons.visibility, size: 30, color: Colors.blue),
             onPressed: () {
               Navigator.push(
                 context,

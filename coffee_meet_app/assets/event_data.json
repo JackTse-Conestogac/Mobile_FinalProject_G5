@@ -3,8 +3,8 @@
     "eventId": 1,
     "hostId": 1,
     "eventName": "Event 1",
-    "startDate": "",
-    "description": "description testing",
+    "startDate": "2024-12-25T17:28:00.000",
+    "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore perferendis vel expedita! Animi saepe velit amet asperiores quos aperiam excepturi sed perferendis nulla culpa nemo voluptate, impedit quas at earum iure possimus non harum exercitationem? Dicta libero animi explicabo saepe ad tenetur, eveniet consequatur recusandae! Eos vel numquam modi cumque.",
     "eventLocation": "Indoors",
     "isPublic": true
   },
@@ -12,8 +12,8 @@
     "eventId": 2,
     "hostId": 1,
     "eventName": "Event 2",
-    "startDate": "",
-    "description": "description testing",
+    "startDate": "2024-12-20T20:28:00.000",
+    "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore perferendis vel expedita! Animi saepe velit amet asperiores quos aperiam excepturi sed perferendis nulla culpa nemo voluptate, impedit quas at earum iure possimus non harum exercitationem? Dicta libero animi explicabo saepe ad tenetur, eveniet consequatur recusandae! Eos vel numquam modi cumque.",
     "eventLocation": "Indoors",
     "isPublic": true
   },
@@ -21,8 +21,17 @@
     "eventId": 3,
     "hostId": 2,
     "eventName": "Event 3",
-    "startDate": "",
-    "description": "description testing",
+    "startDate": "2025-01-11T14:00:00.000",
+    "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore perferendis vel expedita! Animi saepe velit amet asperiores quos aperiam excepturi sed perferendis nulla culpa nemo voluptate, impedit quas at earum iure possimus non harum exercitationem? Dicta libero animi explicabo saepe ad tenetur, eveniet consequatur recusandae! Eos vel numquam modi cumque.",
+    "eventLocation": "Outdoors",
+    "isPublic": true
+  },
+  {
+    "eventId": 4,
+    "hostId": 3,
+    "eventName": "Event 4",
+    "startDate": "2025-01-20T12:00:00.000",
+    "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore perferendis vel expedita! Animi saepe velit amet asperiores quos aperiam excepturi sed perferendis nulla culpa nemo voluptate, impedit quas at earum iure possimus non harum exercitationem? Dicta libero animi explicabo saepe ad tenetur, eveniet consequatur recusandae! Eos vel numquam modi cumque.",
     "eventLocation": "Outdoors",
     "isPublic": true
   }
