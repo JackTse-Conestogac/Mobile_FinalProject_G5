@@ -22,22 +22,26 @@ class EventDetailScreen extends StatelessWidget{
               children: [
                 Icon(Icons.event,size: 100,),
                 SizedBox(width: 16,),
-                Column(
+                Expanded(
+                  child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       event.eventName,
                       style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                         color: Colors.purple,
                       ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     Text(
                       event.startDate.toString(),
                       style: TextStyle(fontSize: 15),
                     ),
                   ],
+                ),
                 ),
               ],
             ),
@@ -63,20 +67,6 @@ class EventDetailScreen extends StatelessWidget{
                  fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 16,),
-            Center(
-              child: ElevatedButton(
-                  onPressed: (){
-                    // display map function in here
-                    debugPrint('View map for event:${event.eventName}');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple,
-                    foregroundColor: Colors.white,
-                  ),
-                  child:Text('View Map'),
-              ),
-            )
           ],
         ),
       ),
