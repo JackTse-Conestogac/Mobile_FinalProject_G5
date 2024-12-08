@@ -193,36 +193,36 @@ class _LogInScreenState extends State<LogInScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
-                Center(
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: FilledButton(
-                      onPressed: _clearAllUsers,
-                      child: const Text('Clear All Users'),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Center(
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: FilledButton(
-                      onPressed: _clearAllEvents,
-                      child: const Text('Clear All Events'),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Center(
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: FilledButton(
-                      onPressed: _InitializeData,
-                      child: const Text('Initialize Data'),
-                    ),
-                  ),
-                ),
+                // const SizedBox(height: 16),
+                // Center(
+                //   child: SizedBox(
+                //     width: double.infinity,
+                //     child: FilledButton(
+                //       onPressed: _clearAllUsers,
+                //       child: const Text('Clear All Users'),
+                //     ),
+                //   ),
+                // ),
+                // const SizedBox(height: 16),
+                // Center(
+                //   child: SizedBox(
+                //     width: double.infinity,
+                //     child: FilledButton(
+                //       onPressed: _clearAllEvents,
+                //       child: const Text('Clear All Events'),
+                //     ),
+                //   ),
+                // ),
+                // const SizedBox(height: 16),
+                // Center(
+                //   child: SizedBox(
+                //     width: double.infinity,
+                //     child: FilledButton(
+                //       onPressed: _InitializeData,
+                //       child: const Text('Initialize Data'),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
