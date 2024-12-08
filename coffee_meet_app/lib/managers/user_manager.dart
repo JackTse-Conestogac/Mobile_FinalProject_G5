@@ -2,11 +2,6 @@ import '../entities/User.dart';
 import '../managers/user_local_storage_manager.dart';
 
 class UserManager {
-  //  User currentUser;
-  //
-  // UserManager({
-  //  required this.currentUser
-  // });
 
   // Fetch all users from local storage
   static Future<List<User>> viewAllUsers() async {
@@ -14,7 +9,7 @@ class UserManager {
     return userList;
   }
 
-  // CHANGE: Fetch user by email and password
+  // Fetch user by email and password
   Future<User> fetchUser(String email, String password) async {
     List<User> allUsers = await viewAllUsers();
 
@@ -25,8 +20,6 @@ class UserManager {
           user.password == password,
     );
   }
-
-
 
   // Add a new user
   Future<void> addUser(User user) async {

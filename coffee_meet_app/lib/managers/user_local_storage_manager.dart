@@ -2,10 +2,29 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import '../entities/User.dart';
-
+import 'package:flutter/services.dart';
 
 class UserLocalStorageManager{
     static const String _userListKey = "USER_LIST";
+
+
+    // initialize data from JSON file
+     static Future<void> initializeTestUsers() async {
+      final SharedPreferences user_prefs = await SharedPreferences.getInstance();
+
+      if (!user_prefs.containsKey(_userListKey)) {
+        try {
+          final String jsonString = await rootBundle.loadString('assets/user_data.json');
+          final List<dynamic> jsonData = jsonDecode(jsonString);
+
+          final List<Map<String, dynamic>> userList = jsonData.map((item) => Map<String, dynamic>.from(item)).toList();
+
+          await user_prefs.setString(_userListKey, jsonEncode(userList));
+        } catch (e) {
+          print('Error loading user data from JSON: $e');
+        }
+      }
+    }
 
 
     // To create / update  a user

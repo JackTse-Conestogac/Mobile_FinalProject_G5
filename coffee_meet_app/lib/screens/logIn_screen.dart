@@ -6,12 +6,10 @@ import 'package:coffee_meet_app/managers/user_manager.dart';
 import 'package:coffee_meet_app/managers/user_local_storage_manager.dart';
 import 'package:coffee_meet_app/managers/connection_local_storage_manager.dart';
 import 'package:coffee_meet_app/entities/User.dart';
-
 import '../managers/event_local_storage_manager.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
-
   @override
   State<LogInScreen> createState() => _LogInScreenState();
 
@@ -28,7 +26,6 @@ class _LogInScreenState extends State<LogInScreen> {
   String? _emailError;
   String? _passwordError;
 
-
   void _navigateToCreateUserScreen(BuildContext context) async {
     final result = await Navigator.push(
       context,
@@ -42,6 +39,16 @@ class _LogInScreenState extends State<LogInScreen> {
       );
     }
   }
+
+
+  Future<void> _InitializeData() async {
+    await UserLocalStorageManager.initializeTestUsers();
+    await EventLocalStorageManager.initializeTestEvents();
+    await ConnectionLocalStorageManager.initializeTestUserConnect();
+    await ConnectionLocalStorageManager.initializeTestEventConnect();
+    print("Initial Data have been added");
+  }
+
 
   Future<void> _clearAllUsers() async {
     _emailError = null;
@@ -89,7 +96,6 @@ class _LogInScreenState extends State<LogInScreen> {
         _emailError = 'No user found with this email';
         return;
       });
-
     }
 
     bool passwordValid = await _userManager.checkPassword(_passwordController.text);
@@ -204,6 +210,16 @@ class _LogInScreenState extends State<LogInScreen> {
                     child: FilledButton(
                       onPressed: _clearAllEvents,
                       child: const Text('Clear All Events'),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Center(
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: FilledButton(
+                      onPressed: _InitializeData,
+                      child: const Text('Initialize Data'),
                     ),
                   ),
                 ),

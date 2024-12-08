@@ -1,0 +1,28 @@
+[
+  {
+    "connectionId": 1,
+    "eventId": 1,
+    "userId": 1
+  },
+  {
+    "connectionId": 2,
+    "eventId": 2,
+    "userId": 1
+  },
+  {
+    "connectionId": 3,
+    "eventId": 1,
+    "userId": 2
+  },
+  {
+    "connectionId": 3,
+    "eventId": 2,
+    "userId": 2
+  },
+  {
+    "connectionId": 4,
+    "eventId": 3,
+    "userId": 3
+  }
+
+]

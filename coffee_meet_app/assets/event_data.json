@@ -1,0 +1,29 @@
+[
+  {
+    "eventId": 1,
+    "hostId": 1,
+    "eventName": "Event 1",
+    "startDate": "",
+    "description": "description testing",
+    "eventLocation": "Indoors",
+    "isPublic": true
+  },
+  {
+    "eventId": 2,
+    "hostId": 1,
+    "eventName": "Event 2",
+    "startDate": "",
+    "description": "description testing",
+    "eventLocation": "Indoors",
+    "isPublic": true
+  },
+  {
+    "eventId": 3,
+    "hostId": 2,
+    "eventName": "Event 3",
+    "startDate": "",
+    "description": "description testing",
+    "eventLocation": "Outdoors",
+    "isPublic": true
+  }
+]

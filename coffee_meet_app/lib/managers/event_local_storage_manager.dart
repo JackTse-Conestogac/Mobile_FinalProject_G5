@@ -3,10 +3,29 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import '../entities/User.dart';
+import 'package:flutter/services.dart';
 
 
 class EventLocalStorageManager {
   static const String _eventListkey = "EVENT_LIST";
+
+  // initialize data from JSON file
+  static Future<void> initializeTestEvents() async {
+    final SharedPreferences event_prefs = await SharedPreferences.getInstance();
+
+    if (!event_prefs.containsKey(_eventListkey)) {
+      try {
+        final String jsonString = await rootBundle.loadString('assets/event_data.json');
+        final List<dynamic> jsonData = jsonDecode(jsonString);
+
+        final List<Map<String, dynamic>> eventList = jsonData.map((item) => Map<String, dynamic>.from(item)).toList();
+
+        await event_prefs.setString(_eventListkey, jsonEncode(eventList));
+      } catch (e) {
+        print('Error loading event data from JSON: $e');
+      }
+    }
+  }
 
   // To create event
   static Future<void> setEvent(Event event) async {

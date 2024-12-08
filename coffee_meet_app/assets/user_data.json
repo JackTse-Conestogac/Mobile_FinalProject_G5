@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "name": "Name1",
+    "password": "123",
+    "email": "a@a.com",
+    "phone": 1231231234,
+    "occupation": "Software Developer",
+    "facebookUrl": "https://www.facebook.com/ConestogaCollege",
+    "linkedInUrl": "https://www.linkedin.com/school/conestoga-college/posts/?feedView=all",
+    "showSocialMedia": true,
+    "isAvailable": false
+  },
+
+  {
+    "id": 2,
+    "name": "Name2",
+    "password": "123",
+    "email": "s@s.com",
+    "phone": 1231231234,
+    "occupation": "Designer",
+    "facebookUrl": "https://www.facebook.com/ConestogaCollege",
+    "linkedInUrl": "https://www.linkedin.com/school/conestoga-college/posts/?feedView=all",
+    "showSocialMedia": true,
+    "isAvailable": false
+  },
+
+  {
+    "id": 3,
+    "name": "Name3",
+    "password": "123",
+    "email": "d@d.com",
+    "phone": 1231231234,
+    "occupation": "Product Manager",
+    "facebookUrl": "https://www.facebook.com/ConestogaCollege",
+    "linkedInUrl": "https://www.linkedin.com/school/conestoga-college/posts/?feedView=all",
+    "showSocialMedia": true,
+    "isAvailable": false
+  },
+  {
+    "id": 4,
+    "name": "Name4",
+    "password": "123",
+    "email": "f@f.com",
+    "phone": 1231231234,
+    "occupation": "Full Stack Developer",
+    "facebookUrl": "https://www.facebook.com/ConestogaCollege",
+    "linkedInUrl": "https://www.linkedin.com/school/conestoga-college/posts/?feedView=all",
+    "showSocialMedia": true,
+    "isAvailable": false
+  },
+  {
+    "id": 5,
+    "name": "Name5",
+    "password": "123",
+    "email": "g@g.com",
+    "phone": 1231231234,
+    "occupation": "Professor",
+    "facebookUrl": "https://www.facebook.com/ConestogaCollege",
+    "linkedInUrl": "https://www.linkedin.com/school/conestoga-college/posts/?feedView=all",
+    "showSocialMedia": true,
+    "isAvailable": false
+  }
+
+]

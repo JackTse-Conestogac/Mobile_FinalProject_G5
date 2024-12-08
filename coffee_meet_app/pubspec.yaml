@@ -69,6 +69,10 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - images/linkedin-with-circle-icon.png
+    - assets/user_data.json
+    - assets/event_data.json
+    - assets/user_connection_data.json
+    - assets/event_connection_data.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

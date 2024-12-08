@@ -3,11 +3,46 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import '../entities/User.dart';
-
+import 'package:flutter/services.dart';
 
 class ConnectionLocalStorageManager {
     static const String _userConnectionKey = "USER_CONNECTION_LIST";
     static const String _eventConnectionKey = "EVENT_CONNECTION_LIST";
+
+    // initialize data from JSON file
+    static Future<void> initializeTestUserConnect() async {
+      final SharedPreferences user_connect_prefs = await SharedPreferences.getInstance();
+
+      if (!user_connect_prefs.containsKey(_userConnectionKey)) {
+        try {
+          final String jsonString = await rootBundle.loadString('assets/user_connection_data.json');
+          final List<dynamic> jsonData = jsonDecode(jsonString);
+
+          final List<Map<String, dynamic>> userConnectList = jsonData.map((item) => Map<String, dynamic>.from(item)).toList();
+
+          await user_connect_prefs.setString(_userConnectionKey, jsonEncode(userConnectList));
+        } catch (e) {
+          print('Error loading user connection data from JSON: $e');
+        }
+      }
+    }
+
+    static Future<void> initializeTestEventConnect() async {
+      final SharedPreferences event_connect_prefs = await SharedPreferences.getInstance();
+
+      if (!event_connect_prefs.containsKey(_eventConnectionKey)) {
+        try {
+          final String jsonString = await rootBundle.loadString('assets/event_connection_data.json');
+          final List<dynamic> jsonData = jsonDecode(jsonString);
+
+          final List<Map<String, dynamic>> eventConnectList = jsonData.map((item) => Map<String, dynamic>.from(item)).toList();
+
+          await event_connect_prefs.setString(_eventConnectionKey, jsonEncode(eventConnectList));
+        } catch (e) {
+          print('Error loading event connection data from JSON: $e');
+        }
+      }
+    }
 
     /// User Connection
     static Future<void> setUserConnection(UserConnection userConnection) async{

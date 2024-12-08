@@ -12,7 +12,6 @@ class Event {
   EventLocation eventLocationStatus ;
   bool isPublic;
 
-
   Event({
     required this.eventId,
     required this.hostId,
